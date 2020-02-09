@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{a3ae136b-1bfe-4003-8470-406761560aec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\App">
+      <UniqueIdentifier>{d6c157ca-cd0c-4304-8a3e-1c599cbe2d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Settings">
+      <UniqueIdentifier>{58553dd9-4228-4a12-a477-89d0eb359e8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Game">
+      <UniqueIdentifier>{40f3b583-e19b-4c31-8250-b66cd6687a88}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>src\App</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsProvider.cpp">
+      <Filter>src\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game_input.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="App.h">
+      <Filter>src\App</Filter>
+    </ClInclude>
+    <ClInclude Include="ExternalSettings.h">
+      <Filter>src\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="InternalSettings.h">
+      <Filter>src\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsProvider.h">
+      <Filter>src\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="IApp.h">
+      <Filter>src\App</Filter>
+    </ClInclude>
+    <ClInclude Include="Fwd.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
