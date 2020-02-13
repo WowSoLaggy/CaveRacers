@@ -2,6 +2,7 @@
 #include "Game.h"
 
 #include "IApp.h"
+#include "IRocketControl.h"
 
 #include <Dx/KeyboardState.h>
 #include <Dx/MouseState.h>
@@ -15,6 +16,16 @@ void Game::handleKeyboard(const Dx::KeyboardState& i_keyboardState)
 
   if (pressedKeys.Escape)
     d_app.stop();
+
+  if (!d_level || !d_level->getControlledObject())
+    return;
+
+  if (currentKeys.W)
+    d_level->getControlledObject()->thrust();
+  if (currentKeys.A)
+    d_level->getControlledObject()->turnLeft();
+  if (currentKeys.D)
+    d_level->getControlledObject()->turnRight();
 }
 
 void Game::handleMouse(const Dx::MouseState& i_mouseState)

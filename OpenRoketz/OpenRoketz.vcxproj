@@ -69,7 +69,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -136,9 +147,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="BattleScene.cpp" />
+    <ClCompile Include="CreateGame.cpp" />
+    <ClCompile Include="CreateLevel.cpp" />
+    <ClCompile Include="CreateObjects.cpp" />
+    <ClCompile Include="CreateScene.cpp" />
+    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="EnginePrototype.cpp" />
+    <ClCompile Include="FuelTank.cpp" />
+    <ClCompile Include="FuelTankPrototype.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game_input.cpp" />
+    <ClCompile Include="Hull.cpp" />
+    <ClCompile Include="HullPrototype.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="IPrototypeCollection.cpp" />
+    <ClCompile Include="PrototypeCollection.cpp" />
+    <ClCompile Include="Rocket.cpp" />
+    <ClCompile Include="Rocket_control.cpp" />
+    <ClCompile Include="SceneObject.cpp" />
+    <ClCompile Include="Session.cpp" />
     <ClCompile Include="SettingsProvider.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -149,11 +179,48 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="BattleScene.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="CreateGame.h" />
+    <ClInclude Include="CreateLevel.h" />
+    <ClInclude Include="CreateObjects.h" />
+    <ClInclude Include="CreateScene.h" />
+    <ClInclude Include="Engine.h" />
+    <ClInclude Include="EnginePrototype.h" />
     <ClInclude Include="ExternalSettings.h" />
+    <ClInclude Include="FuelTankPrototype.h" />
+    <ClInclude Include="HullPrototype.h" />
+    <ClInclude Include="IEngine.h" />
+    <ClInclude Include="IEnginePrototype.h" />
+    <ClInclude Include="IFuelTank.h" />
+    <ClInclude Include="IFuelTankPrototype.h" />
+    <ClInclude Include="IGame.h" />
+    <ClInclude Include="IHull.h" />
+    <ClInclude Include="IHullPrototype.h" />
+    <ClInclude Include="ILevel.h" />
+    <ClInclude Include="ILevelModel.h" />
+    <ClInclude Include="ILevelView.h" />
+    <ClInclude Include="ISceneObject.h" />
+    <ClInclude Include="IPrototype.h" />
+    <ClInclude Include="IRocket.h" />
+    <ClInclude Include="IScene.h" />
+    <ClInclude Include="ISession.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="IPrototypeCollection.h" />
+    <ClInclude Include="PrototypeCollection.h" />
+    <ClInclude Include="SceneObject.h" />
+    <ClInclude Include="Session.h" />
+    <ClInclude Include="Force.h" />
+    <ClInclude Include="FuelTank.h" />
     <ClInclude Include="Fwd.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Hull.h" />
     <ClInclude Include="IApp.h" />
+    <ClInclude Include="IRocketControl.h" />
+    <ClInclude Include="IInertial.h" />
     <ClInclude Include="InternalSettings.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="Rocket.h" />
     <ClInclude Include="SettingsProvider.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

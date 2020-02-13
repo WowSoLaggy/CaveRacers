@@ -13,6 +13,36 @@
     <Filter Include="src\Game">
       <UniqueIdentifier>{40f3b583-e19b-4c31-8250-b66cd6687a88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Physics">
+      <UniqueIdentifier>{9cb11163-982d-484c-8146-15ce43b60d54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{b4c3ffe0-1196-4aa2-83a1-4e47baf916d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\LevelModel">
+      <UniqueIdentifier>{c83165a1-813b-4e03-a0aa-ef615be07cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Objects">
+      <UniqueIdentifier>{690ea473-8d9e-41f6-803c-02436276d01f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Components">
+      <UniqueIdentifier>{81373a4b-fbea-45d4-8293-6e172dda94d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Components\FuelTank">
+      <UniqueIdentifier>{6412acca-1fd7-44d8-8686-55597519f772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Session">
+      <UniqueIdentifier>{2a1f0e87-bfb0-43fb-9175-49ce0d61a2be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Components\Engine">
+      <UniqueIdentifier>{3302b755-7d28-43ee-a4c1-26337ca0acee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Components\Hull">
+      <UniqueIdentifier>{37636333-8231-4c91-95b4-a1291b5679cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\PrototypeCollection">
+      <UniqueIdentifier>{9fc6f365-330b-4aa8-aa16-42fe9cfbcbc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -32,6 +62,63 @@
     </ClCompile>
     <ClCompile Include="Game_input.cpp">
       <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Rocket.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>src\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateLevel.cpp">
+      <Filter>src\LevelModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>src\LevelModel</Filter>
+    </ClCompile>
+    <ClCompile Include="FuelTank.cpp">
+      <Filter>src\Components\FuelTank</Filter>
+    </ClCompile>
+    <ClCompile Include="FuelTankPrototype.cpp">
+      <Filter>src\Components\FuelTank</Filter>
+    </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>src\Session</Filter>
+    </ClCompile>
+    <ClCompile Include="IPrototypeCollection.cpp">
+      <Filter>src\PrototypeCollection</Filter>
+    </ClCompile>
+    <ClCompile Include="PrototypeCollection.cpp">
+      <Filter>src\PrototypeCollection</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>src\Components\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePrototype.cpp">
+      <Filter>src\Components\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Hull.cpp">
+      <Filter>src\Components\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="HullPrototype.cpp">
+      <Filter>src\Components\Hull</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateGame.cpp">
+      <Filter>src\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Rocket_control.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateObjects.cpp">
+      <Filter>src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>src\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +145,117 @@
     </ClInclude>
     <ClInclude Include="Fwd.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Rocket.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="IInertial.h">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="IScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ILevelModel.h">
+      <Filter>src\LevelModel</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateLevel.h">
+      <Filter>src\LevelModel</Filter>
+    </ClInclude>
+    <ClInclude Include="ILevelView.h">
+      <Filter>src\LevelModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>src\LevelModel</Filter>
+    </ClInclude>
+    <ClInclude Include="ILevel.h">
+      <Filter>src\LevelModel</Filter>
+    </ClInclude>
+    <ClInclude Include="IRocket.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="FuelTank.h">
+      <Filter>src\Components\FuelTank</Filter>
+    </ClInclude>
+    <ClInclude Include="FuelTankPrototype.h">
+      <Filter>src\Components\FuelTank</Filter>
+    </ClInclude>
+    <ClInclude Include="IFuelTank.h">
+      <Filter>src\Components\FuelTank</Filter>
+    </ClInclude>
+    <ClInclude Include="IFuelTankPrototype.h">
+      <Filter>src\Components\FuelTank</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>src\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="IPrototypeCollection.h">
+      <Filter>src\PrototypeCollection</Filter>
+    </ClInclude>
+    <ClInclude Include="PrototypeCollection.h">
+      <Filter>src\PrototypeCollection</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>src\Components\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IEnginePrototype.h">
+      <Filter>src\Components\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IPrototype.h">
+      <Filter>src\PrototypeCollection</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePrototype.h">
+      <Filter>src\Components\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="IEngine.h">
+      <Filter>src\Components\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Hull.h">
+      <Filter>src\Components\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="IHullPrototype.h">
+      <Filter>src\Components\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="HullPrototype.h">
+      <Filter>src\Components\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="IHull.h">
+      <Filter>src\Components\Hull</Filter>
+    </ClInclude>
+    <ClInclude Include="ISession.h">
+      <Filter>src\Session</Filter>
+    </ClInclude>
+    <ClInclude Include="IGame.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateGame.h">
+      <Filter>src\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Force.h">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="ISceneObject.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="IRocketControl.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateObjects.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>src\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

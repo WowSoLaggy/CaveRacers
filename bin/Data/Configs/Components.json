@@ -1,0 +1,45 @@
+{
+  "FuelTanks":
+  {
+    "Default":
+    {
+      "MaxFuel": 100,
+      "MassEmpty": 50
+    },
+    "Advanced":
+    {
+      "MaxFuel": 200,
+      "MassEmpty": 100
+    }
+  },
+  
+  "Engines":
+  {
+    "Default":
+    {
+      "Power": 25000,
+      "Consumption": 1,
+      "Mass": 200
+    },
+    "Advanced":
+    {
+      "Power": 20000,
+      "Consumption": 2,
+      "Mass": 400
+    }
+  },
+  
+  "Hulls":
+  {
+    "Default":
+    {
+      "MaxArmor": 100,
+      "Mass": 100
+    },
+    "Advanced":
+    {
+      "MaxArmor": 200,
+      "Mass": 200
+    }
+  }
+}

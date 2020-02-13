@@ -1,25 +1,45 @@
 #pragma once
 
 #include "Fwd.h"
+#include "IGame.h"
+#include "ILevel.h"
+#include "IScene.h"
+#include "Session.h"
 
 #include <Dx/LaggyDxFwd.h>
 #include <Dx/MouseKey.h>
 
 
-class Game
+class Game : public IGame
 {
 public:
   Game(IApp& i_app, Dx::IResourceController& i_resourceController);
 
-  void update(double i_dt);
-  void render(Dx::IRenderer2d& i_renderer) const;
+  virtual void update(double i_dt) override;
+  virtual void render(Dx::IRenderer2d& i_renderer) const override;
 
-  void handleKeyboard(const Dx::KeyboardState& i_keyboardState);
-  void handleMouse(const Dx::MouseState& i_mouseState);
+  virtual void handleKeyboard(const Dx::KeyboardState& i_keyboardState) override;
+  virtual void handleMouse(const Dx::MouseState& i_mouseState) override;
+
+private:
+  enum class State
+  {
+    NotLoaded,
+    Loaded,
+  };
 
 private:
   IApp& d_app;
   Dx::IResourceController& d_resourceController;
+
+  State d_state = State::NotLoaded;
+
+  std::unique_ptr<IScene> d_scene;
+  std::unique_ptr<ILevel> d_level;
+  std::optional<Session> d_session;
+
+  void loadResources();
+  void startNewLevel();
 
   void onMouseClick(Dx::MouseKey i_button);
   void onMouseRelease(Dx::MouseKey i_button);

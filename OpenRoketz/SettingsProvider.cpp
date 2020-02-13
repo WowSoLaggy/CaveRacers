@@ -15,14 +15,18 @@ namespace
   InternalSettings createDefaultInternalSettings()
   {
     InternalSettings settings;
+
     settings.applicationName = "Space Explorers";
-    settings.assetsFolder = "Data/Assets";
-    settings.configFolder = "Data/Configs";
-    settings.savesFolder = "Saves";
-    settings.tileSize = 64;
+
+    settings.dataFolder = fs::current_path() / "Data";
+    settings.assetsFolder = settings.dataFolder / "Assets";
+    settings.configFolder = settings.dataFolder / "Configs";
+    settings.savesFolder = fs::current_path() / "Saves";
+
+    settings.componentPrototypesFile = "Components.json";
+
     settings.defaultFontName = "MyFont.spritefont";
-    settings.structuresPrototypesFile = "Structures.json";
-    settings.objectsPrototypesFile = "Objects.json";
+
     return settings;
   }
 

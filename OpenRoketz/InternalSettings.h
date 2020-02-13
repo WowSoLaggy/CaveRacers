@@ -6,13 +6,13 @@
 struct InternalSettings
 {
   std::string applicationName;
-  std::string assetsFolder;
-  std::string configFolder;
-  std::string savesFolder;
 
-  int tileSize = 0;
+  fs::path dataFolder;
+  fs::path assetsFolder;
+  fs::path configFolder;
+  fs::path savesFolder;
+
+  fs::path componentPrototypesFile;
+
   std::string defaultFontName;
-
-  std::string structuresPrototypesFile;
-  std::string objectsPrototypesFile;
 };

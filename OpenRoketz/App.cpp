@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "App.h"
 
+#include "CreateGame.h"
 #include "SettingsProvider.h"
 
 #include <Sdk/HandleMessages.h>
@@ -45,7 +46,7 @@ App::App()
   d_inputDevice = Dx::IInputDevice::create(d_window->getHWnd());
   CONTRACT_ENSURE(d_inputDevice);
 
-  d_game = std::make_unique<Game>(*this, *d_resourceController);
+  d_game = createGame(*this, *d_resourceController);
 
   setCursorToCenter();
   d_window->show();

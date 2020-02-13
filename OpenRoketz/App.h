@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Game.h"
+#include "IGame.h"
 #include "IApp.h"
 
 #include <Dx/IInputDevice.h>
@@ -21,7 +21,7 @@ public:
   virtual void stop() override;
 
 private:
-  std::unique_ptr<Game> d_game;
+  std::unique_ptr<IGame> d_game;
 
   Sdk::Timer d_timer;
   std::unique_ptr<Sdk::Window> d_window;
