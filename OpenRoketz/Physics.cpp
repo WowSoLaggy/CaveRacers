@@ -41,8 +41,9 @@ void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const Force&
 
   auto speed = io_object.getSpeed() + acceleration * i_dt;
   const auto speedValue = speed.length();
-  if (speedValue > 30)
-    speed = speed * 30 / speedValue;
+  constexpr double MaxSpeed = 30;
+  if (speedValue > MaxSpeed)
+    speed = speed * MaxSpeed / speedValue;
   io_object.setSpeed(speed);
 
   if (speed.lengthSq() < MovementThreshold)
