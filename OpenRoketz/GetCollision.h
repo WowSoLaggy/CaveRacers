@@ -2,5 +2,7 @@
 
 #include "Fwd.h"
 
+#include <Sdk/Vector.h>
 
-bool getCollision(const IInertial& i_left, const IInertial& i_right);
+
+std::optional<Sdk::Vector2D> getCollisionNormal(const IInertial& i_left, const IInertial& i_right);

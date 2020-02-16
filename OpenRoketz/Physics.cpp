@@ -7,7 +7,7 @@
 
 namespace
 {
-  constexpr double MovementThreshold = 0.0001;
+  constexpr double MovementThreshold = 0.01;
 
   Sdk::Vector2D getAcceleration(IInertial& io_object, const Force& i_staticForceSum)
   {
@@ -52,34 +52,52 @@ void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_ob
   {
     CONTRACT_ASSERT(object);
 
-    const bool inCollision = std::any_of(io_objects.begin(), io_objects.end(),
-                                         [&](const auto& i_other) {
-      return object.get() == i_other.get() ? false : getCollision(*object, *i_other);
-    });
+    std::vector<Sdk::Vector2D> normals;
+    for (const auto& i_other : io_objects)
+    {
+      if (object.get() == i_other.get())
+        continue;
+      const auto normal = getCollisionNormal(*object, *i_other);
+      if (normal)
+        normals.push_back(*normal);
+    }
 
-    if (!inCollision)
-      updateObject(i_dt, *object, staticForceSum);
+    updateObject(i_dt, *object, staticForceSum, normals);
   }
 }
 
-void Physics::updateObject(double i_dt, IInertial& io_object, const Force& i_staticForceSum) const
+void Physics::updateObject(double i_dt, IInertial& io_object, const Force& i_staticForceSum,
+                           const std::vector<Sdk::Vector2D>& i_normals) const
 {
-  updateObjectLinear(i_dt, io_object, i_staticForceSum);
+  updateObjectLinear(i_dt, io_object, i_staticForceSum, i_normals);
   updateObjectRotation(i_dt, io_object);
 }
 
-void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const Force& i_staticForceSum) const
+void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const Force& i_staticForceSum,
+                                 const std::vector<Sdk::Vector2D>& i_normals) const
 {
-  const auto acceleration = getAcceleration(io_object, i_staticForceSum);
+  auto acceleration = getAcceleration(io_object, i_staticForceSum);
   if (acceleration.lengthSq() < MovementThreshold)
-    return;
+    acceleration = {};
 
-  const auto speed = getSpeed(io_object, acceleration, i_dt);
+  auto speed = getSpeed(io_object, acceleration, i_dt);
+
+  // Remove collisions
+  for (const auto& normal : i_normals)
+  {
+    const auto& normalProjection = speed.dot(normal);
+    if (normalProjection > 0)
+      speed = speed - normal * normalProjection * 1.5;
+
+    speed = speed * 0.9;
+  }
+
   if (speed.lengthSq() < MovementThreshold)
   {
     io_object.setSpeed({ 0, 0 });
     return;
   }
+
   io_object.setSpeed(speed);
 
   const auto position = getPosition(io_object, speed, i_dt);

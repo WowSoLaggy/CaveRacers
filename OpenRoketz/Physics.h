@@ -3,6 +3,8 @@
 #include "Force.h"
 #include "IInertial.h"
 
+#include <Sdk/Vector.h>
+
 
 class Physics
 {
@@ -16,7 +18,9 @@ private:
 
   Force getStaticForcesSum() const;
 
-  void updateObject(double i_dt, IInertial& io_object, const Force& i_staticForceSum) const;
-  void updateObjectLinear(double i_dt, IInertial& io_object, const Force& i_staticForceSum) const;
+  void updateObject(double i_dt, IInertial& io_object, const Force& i_staticForceSum,
+                    const std::vector<Sdk::Vector2D>& i_normals) const;
+  void updateObjectLinear(double i_dt, IInertial& io_object, const Force& i_staticForceSum,
+                          const std::vector<Sdk::Vector2D>& i_normals) const;
   void updateObjectRotation(double i_dt, IInertial& io_object) const;
 };

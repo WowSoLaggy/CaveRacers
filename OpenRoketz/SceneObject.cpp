@@ -26,7 +26,6 @@ const Sdk::Vector2D& SceneObject::getSpeed() const
 
 void SceneObject::setSpeed(Sdk::Vector2D i_speed)
 {
-  CONTRACT_ASSERT(false);
 }
 
 
@@ -37,7 +36,6 @@ double SceneObject::getRotation() const
 
 void SceneObject::setRotation(double i_rotation)
 {
-  CONTRACT_ASSERT(false);
 }
 
 
