@@ -18,6 +18,9 @@ public:
   virtual void update(double i_dt) override;
   virtual void render(Dx::IRenderer2d& i_renderer) const override;
 
+  virtual void showDebug(bool i_show) override;
+  virtual void toggleDebug() override;
+
 private:
   const ILevelView& d_levelView;
   Dx::IResourceController& d_resourceController;
@@ -29,6 +32,8 @@ private:
 
   double d_time = 0.0;
   const Dx::IFontResource& d_font;
+
+  bool d_showDebug = false;
 
   void renderBackgound(Dx::IRenderer2d& i_renderer) const;
 };

@@ -2,6 +2,7 @@
 #include "Physics.h"
 
 #include "Constants.h"
+#include "GetCollision.h"
 
 
 namespace
@@ -50,7 +51,14 @@ void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_ob
   for (auto& object : io_objects)
   {
     CONTRACT_ASSERT(object);
-    updateObject(i_dt, *object, staticForceSum);
+
+    const bool inCollision = std::any_of(io_objects.begin(), io_objects.end(),
+                                         [&](const auto& i_other) {
+      return object.get() == i_other.get() ? false : getCollision(*object, *i_other);
+    });
+
+    if (!inCollision)
+      updateObject(i_dt, *object, staticForceSum);
   }
 }
 

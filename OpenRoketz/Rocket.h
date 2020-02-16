@@ -37,6 +37,10 @@ public:
   virtual bool isGravityAffected() const override;
   virtual void setGravityAffected(bool i_affected) override;
 
+  virtual Sdk::RectD getRect() const override;
+  virtual bool isCollidable() const override;
+  virtual void setCollidable(bool i_collidable) override;
+
   // ISceneObject implementation
 
   virtual const std::string& getTextureName() const override;
@@ -64,6 +68,7 @@ private:
   std::vector<Force> d_activeForces;
 
   bool d_gravityAffected = true;
+  bool d_collidable = true;
 
   std::string d_textureName;
 };

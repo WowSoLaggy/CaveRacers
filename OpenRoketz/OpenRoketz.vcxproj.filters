@@ -43,6 +43,9 @@
     <Filter Include="src\PrototypeCollection">
       <UniqueIdentifier>{9fc6f365-330b-4aa8-aa16-42fe9cfbcbc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Collisions">
+      <UniqueIdentifier>{6d6b2d08-db6e-46c2-8fc3-8b9b3c151286}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -119,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="SceneObject.cpp">
       <Filter>src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GetCollision.cpp">
+      <Filter>src\Collisions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="SceneObject.h">
       <Filter>src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GetCollision.h">
+      <Filter>src\Collisions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

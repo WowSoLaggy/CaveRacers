@@ -74,7 +74,22 @@ void BattleScene::render(Dx::IRenderer2d& i_renderer) const
     sprite.setRotation(objectView->getRotation());
 
     i_renderer.renderSprite(sprite);
+
+    // Debug collisions
+    if (!d_showDebug)
+      continue;
+
+    auto collisionRect = objectView->getRect();
+    collisionRect.p1 = collisionRect.p1 * WorldScale;
+    collisionRect.p2 = collisionRect.p2 * WorldScale;
+    collisionRect.p1.y = d_viewport.bottom() - collisionRect.p1.y;
+    collisionRect.p2.y = d_viewport.bottom() - collisionRect.p2.y;
+    i_renderer.renderRect(collisionRect, { 1, 0.9f, 0.1f, 1 });
   }
+
+  // Debug info
+  if (!d_showDebug)
+    return;
 
   i_renderer.resetTranslation();
 
@@ -106,4 +121,15 @@ void BattleScene::renderBackgound(Dx::IRenderer2d& i_renderer) const
       i_renderer.renderSprite(*d_background);
     }
   }
+}
+
+
+void BattleScene::showDebug(bool i_show)
+{
+  d_showDebug = i_show;
+}
+
+void BattleScene::toggleDebug()
+{
+  showDebug(!d_showDebug);
 }

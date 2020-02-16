@@ -98,3 +98,25 @@ void Rocket::setRotationSpeed(double i_rotationSpeed)
 {
   d_rotationSpeed = i_rotationSpeed;
 }
+
+
+Sdk::RectD Rocket::getRect() const
+{
+  constexpr double Size = 32.0 / 10;
+  constexpr double HalfSize = Size / 2;
+
+  const double left = getPosition().x - HalfSize;
+  const double top = getPosition().y - HalfSize;
+
+  return Sdk::RectD(left, left + Size, top, top + Size);
+}
+
+bool Rocket::isCollidable() const
+{
+  return d_collidable;
+}
+
+void Rocket::setCollidable(bool i_collidable)
+{
+  d_collidable = i_collidable;
+}

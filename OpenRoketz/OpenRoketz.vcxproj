@@ -158,6 +158,7 @@
     <ClCompile Include="FuelTankPrototype.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game_input.cpp" />
+    <ClCompile Include="GetCollision.cpp" />
     <ClCompile Include="Hull.cpp" />
     <ClCompile Include="HullPrototype.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="EnginePrototype.h" />
     <ClInclude Include="ExternalSettings.h" />
     <ClInclude Include="FuelTankPrototype.h" />
+    <ClInclude Include="GetCollision.h" />
     <ClInclude Include="HullPrototype.h" />
     <ClInclude Include="IEngine.h" />
     <ClInclude Include="IEnginePrototype.h" />

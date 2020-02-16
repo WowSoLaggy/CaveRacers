@@ -87,3 +87,25 @@ const std::string& SceneObject::getTextureName() const
 {
   return d_textureName;
 }
+
+
+Sdk::RectD SceneObject::getRect() const
+{
+  constexpr double Size = 64.0 / 10;
+  constexpr double HalfSize = Size / 2;
+
+  const double left = getPosition().x - HalfSize;
+  const double top = getPosition().y - HalfSize;
+
+  return Sdk::RectD(left, left + Size, top, top + Size);
+}
+
+bool SceneObject::isCollidable() const
+{
+  return d_collidable;
+}
+
+void SceneObject::setCollidable(bool i_collidable)
+{
+  d_collidable = i_collidable;
+}

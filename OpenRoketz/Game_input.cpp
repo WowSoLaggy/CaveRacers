@@ -16,16 +16,28 @@ void Game::handleKeyboard(const Dx::KeyboardState& i_keyboardState)
 
   if (pressedKeys.Escape)
     d_app.stop();
+  if (pressedKeys.Back)
+  {
+    // Just for debug
+    int lol = 10;
+    lol = lol;
+  }
 
-  if (!d_level || !d_level->getControlledObject())
-    return;
+  if (d_level && d_level->getControlledObject())
+  {
+    if (currentKeys.W)
+      d_level->getControlledObject()->thrust();
+    if (currentKeys.A)
+      d_level->getControlledObject()->turnLeft();
+    if (currentKeys.D)
+      d_level->getControlledObject()->turnRight();
+  }
 
-  if (currentKeys.W)
-    d_level->getControlledObject()->thrust();
-  if (currentKeys.A)
-    d_level->getControlledObject()->turnLeft();
-  if (currentKeys.D)
-    d_level->getControlledObject()->turnRight();
+  if (d_scene)
+  {
+    if (pressedKeys.F1)
+      d_scene->toggleDebug();
+  }
 }
 
 void Game::handleMouse(const Dx::MouseState& i_mouseState)

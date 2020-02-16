@@ -12,6 +12,7 @@ class IRocketControl;
 
 class ISceneObject;
 class SceneObject;
+class IInertial;
 
 class IFuelTankPrototype;
 class IFuelTank;

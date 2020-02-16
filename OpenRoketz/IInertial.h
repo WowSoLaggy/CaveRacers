@@ -2,6 +2,7 @@
 
 #include "Force.h"
 
+#include <Sdk/Rect.h>
 #include <Sdk/Vector.h>
 
 
@@ -11,7 +12,7 @@ public:
   virtual ~IInertial() = default;
 
   virtual double getMass() const = 0;
-
+  
   virtual const Sdk::Vector2D& getPosition() const = 0;
   virtual void setPosition(Sdk::Vector2D i_position) = 0;
 
@@ -30,4 +31,8 @@ public:
 
   virtual bool isGravityAffected() const = 0;
   virtual void setGravityAffected(bool i_affected) = 0;
+
+  virtual Sdk::RectD getRect() const = 0;
+  virtual bool isCollidable() const = 0;
+  virtual void setCollidable(bool i_collidable) = 0;
 };
