@@ -50,6 +50,9 @@ Physics& Level::getPhysics()
 
 void Level::update(double i_dt)
 {
+  for (auto& object : d_objects)
+    object->update(i_dt);
+
   auto inertials = std::vector<std::shared_ptr<IInertial>>{d_objects.begin(), d_objects.end()};
   d_physics.update(i_dt, inertials);
 }

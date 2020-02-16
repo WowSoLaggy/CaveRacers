@@ -44,6 +44,7 @@ public:
   // ISceneObject implementation
 
   virtual const std::string& getTextureName() const override;
+  virtual void update(double i_dt) override;
 
   // IRocketControl implementation
 
@@ -53,6 +54,10 @@ public:
 
   virtual void fire() override;
   virtual void changeWeapon() override;
+
+  // IRocket implementation
+
+  virtual double getFuelPercentage() const override;
 
 private:
   FuelTank d_fuelTank;
@@ -69,6 +74,8 @@ private:
 
   bool d_gravityAffected = true;
   bool d_collidable = true;
+
+  bool d_thrusting = false;
 
   std::string d_textureName;
 };

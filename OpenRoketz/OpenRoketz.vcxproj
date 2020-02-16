@@ -159,10 +159,12 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game_input.cpp" />
     <ClCompile Include="GetCollision.cpp" />
+    <ClCompile Include="Gui.cpp" />
     <ClCompile Include="Hull.cpp" />
     <ClCompile Include="HullPrototype.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="GaugePanel.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="IPrototypeCollection.cpp" />
     <ClCompile Include="PrototypeCollection.cpp" />
@@ -191,6 +193,7 @@
     <ClInclude Include="ExternalSettings.h" />
     <ClInclude Include="FuelTankPrototype.h" />
     <ClInclude Include="GetCollision.h" />
+    <ClInclude Include="Gui.h" />
     <ClInclude Include="HullPrototype.h" />
     <ClInclude Include="IEngine.h" />
     <ClInclude Include="IEnginePrototype.h" />
@@ -209,6 +212,7 @@
     <ClInclude Include="ISession.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="IPrototypeCollection.h" />
+    <ClInclude Include="LevelEvents.h" />
     <ClInclude Include="PrototypeCollection.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Session.h" />
@@ -233,6 +237,9 @@
     <ProjectReference Include="..\..\LaggySdk\LaggySdk\LaggySdk.vcxproj">
       <Project>{26f606c5-4239-49f0-b3d4-c358526c2325}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GaugePanel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

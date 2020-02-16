@@ -2,8 +2,10 @@
 
 #include "Fwd.h"
 
+#include <Sdk/EventHandler.h>
 
-class ILevelView
+
+class ILevelView : public Sdk::EventHandler
 {
 public:
   virtual ~ILevelView() = default;

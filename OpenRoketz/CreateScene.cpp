@@ -4,7 +4,7 @@
 #include "BattleScene.h"
 
 
-std::unique_ptr<IScene> createBattleScene(const ILevelView& io_levelView,
+std::unique_ptr<IScene> createBattleScene(ILevelView& io_levelView,
                                           Dx::IResourceController& i_resourceController,
                                           const Sdk::RectI& i_viewport)
 {

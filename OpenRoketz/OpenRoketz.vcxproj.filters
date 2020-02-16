@@ -46,6 +46,12 @@
     <Filter Include="src\Collisions">
       <UniqueIdentifier>{6d6b2d08-db6e-46c2-8fc3-8b9b3c151286}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Gui">
+      <UniqueIdentifier>{567e8825-93b2-4851-a2af-e73ecc868fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Gui\Controls">
+      <UniqueIdentifier>{f5eab3ac-0a69-4a7b-81da-8d044d393d66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -125,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="GetCollision.cpp">
       <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>src\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="GaugePanel.cpp">
+      <Filter>src\Gui\Controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -266,5 +278,16 @@
     <ClInclude Include="GetCollision.h">
       <Filter>src\Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>src\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEvents.h">
+      <Filter>src\LevelModel</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GaugePanel.h">
+      <Filter>src\Gui\Controls</Filter>
+    </None>
   </ItemGroup>
 </Project>

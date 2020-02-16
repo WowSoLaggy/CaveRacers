@@ -19,13 +19,14 @@ namespace
 } // anonymous NS
 
 
-BattleScene::BattleScene(const ILevelView& io_levelView,
+BattleScene::BattleScene(ILevelView& io_levelView,
                          Dx::IResourceController& i_resourceController,
                          Sdk::RectI i_viewport)
   : d_levelView(io_levelView)
   , d_resourceController(i_resourceController)
   , d_font(i_resourceController.getFontResource(FontName))
   , d_viewport(std::move(i_viewport))
+  , d_gui(i_resourceController, io_levelView)
 {
   if (const auto backgroundTextureName = d_levelView.getBackgroundTextureName())
   {
@@ -48,6 +49,8 @@ void BattleScene::update(double i_dt)
     const auto position = controlledObject->getPosition();
     d_cameraOffset = { (int)(position.x * WorldScale), d_viewport.bottom() - (int)(position.y * WorldScale) };
   }
+
+  d_gui.update(i_dt);
 }
 
 void BattleScene::render(Dx::IRenderer2d& i_renderer) const
@@ -86,6 +89,8 @@ void BattleScene::render(Dx::IRenderer2d& i_renderer) const
     collisionRect.p2.y = d_viewport.bottom() - collisionRect.p2.y;
     i_renderer.renderRect(collisionRect, { 1, 0.9f, 0.1f, 1 });
   }
+
+  d_gui.render(i_renderer);
 
   // Debug info
   if (!d_showDebug)

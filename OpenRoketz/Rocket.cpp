@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Rocket.h"
 
+#include "IEnginePrototype.h"
 #include "IFuelTankPrototype.h"
 #include "IHullPrototype.h"
 
@@ -54,6 +55,7 @@ const std::vector<Force>& Rocket::getActiveForces() const
 void Rocket::clearActiveForces()
 {
   d_activeForces.clear();
+  d_thrusting = false;
 }
 
 
@@ -76,6 +78,13 @@ const std::string& Rocket::getTextureName() const
 void Rocket::setTextureName(std::string i_textureName)
 {
   d_textureName = std::move(i_textureName);
+}
+
+
+void Rocket::update(double i_dt)
+{
+  if (d_thrusting)
+    d_fuelTank.waste(d_engine.getPrototype().getConsumption() * i_dt);
 }
 
 
@@ -119,4 +128,10 @@ bool Rocket::isCollidable() const
 void Rocket::setCollidable(bool i_collidable)
 {
   d_collidable = i_collidable;
+}
+
+
+double Rocket::getFuelPercentage() const
+{
+  return d_fuelTank.getFuel() / d_fuelTank.getPrototype().getMaxFuel();
 }

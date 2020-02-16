@@ -4,6 +4,7 @@ class IApp;
 
 class IScene;
 class ILevelModel;
+class ILevelView;
 class ISession;
 
 class IRocket;

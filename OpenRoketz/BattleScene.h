@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Gui.h"
 #include "ILevelView.h"
 #include "IScene.h"
 
@@ -11,7 +12,7 @@
 class BattleScene : public IScene
 {
 public:
-  BattleScene(const ILevelView& io_levelView,
+  BattleScene(ILevelView& io_levelView,
               Dx::IResourceController& i_resourceController,
               Sdk::RectI i_viewport);
 
@@ -34,6 +35,8 @@ private:
   const Dx::IFontResource& d_font;
 
   bool d_showDebug = false;
+
+  Gui d_gui;
 
   void renderBackgound(Dx::IRenderer2d& i_renderer) const;
 };

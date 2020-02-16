@@ -13,6 +13,8 @@ std::shared_ptr<Rocket> createRocket(const std::string& i_fuelTankName,
   const auto& prototypeCollection = IPrototypeCollection::get();
 
   FuelTank fuelTank(prototypeCollection.getFuelTank(i_fuelTankName));
+  fuelTank.fill();
+
   Engine engine(prototypeCollection.getEngine(i_engineName));
   Hull hull(prototypeCollection.getHull(i_hullName));
 

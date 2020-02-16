@@ -6,6 +6,9 @@
 
 void Rocket::thrust()
 {
+  if (d_fuelTank.isEmpty())
+    return;
+
   const auto thrustPower = d_engine.getPrototype().getPower();
 
   const double y = std::cos(getRotation());
@@ -13,6 +16,8 @@ void Rocket::thrust()
   const Force thrust = Sdk::Vector2D{ x, y } * thrustPower;
 
   addActiveForce(thrust);
+
+  d_thrusting = true;
 }
 
 void Rocket::turnLeft()
