@@ -9,6 +9,6 @@ std::unique_ptr<IScene> createBattleScene(const ILevelView& io_levelView,
                                           const Sdk::RectI& i_viewport)
 {
   auto battleScene = std::make_unique<BattleScene>(io_levelView, i_resourceController, i_viewport);
-  battleScene->showDebug(true);
+  //battleScene->showDebug(true);
   return battleScene;
 }

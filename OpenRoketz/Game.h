@@ -8,6 +8,7 @@
 
 #include <Dx/LaggyDxFwd.h>
 #include <Dx/MouseKey.h>
+#include <Sdk/Vector.h>
 
 
 class Game : public IGame
@@ -31,6 +32,8 @@ private:
 private:
   IApp& d_app;
   Dx::IResourceController& d_resourceController;
+
+  Sdk::Vector2I d_mousePos;
 
   State d_state = State::NotLoaded;
 

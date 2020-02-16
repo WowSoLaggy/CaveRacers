@@ -25,11 +25,11 @@ void Game::handleKeyboard(const Dx::KeyboardState& i_keyboardState)
 
   if (d_level && d_level->getControlledObject())
   {
-    if (currentKeys.W)
+    if (currentKeys.W || currentKeys.Up)
       d_level->getControlledObject()->thrust();
-    if (currentKeys.A)
+    if (currentKeys.A || currentKeys.Left)
       d_level->getControlledObject()->turnLeft();
-    if (currentKeys.D)
+    if (currentKeys.D || currentKeys.Right)
       d_level->getControlledObject()->turnRight();
   }
 
@@ -45,8 +45,9 @@ void Game::handleMouse(const Dx::MouseState& i_mouseState)
   const auto& mousePosRaw = i_mouseState.getPosition();
   if (i_mouseState.getMode() == Dx::MouseMode::Absolute)
   {
-    //if (mousePosRaw != d_gui.getCursor().getPosition())
+    if (mousePosRaw != d_mousePos)
     {
+      d_mousePos = mousePosRaw;
       //d_gui.getCursor().setPosition(mousePosRaw);
       onMouseMove();
     }
@@ -55,6 +56,7 @@ void Game::handleMouse(const Dx::MouseState& i_mouseState)
   {
     if (mousePosRaw != Sdk::Vector2I{ 0, 0 })
     {
+      d_mousePos += mousePosRaw;
       //d_gui.getCursor().movePosition(mousePosRaw);
       onMouseMove();
     }
