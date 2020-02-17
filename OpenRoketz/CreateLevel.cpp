@@ -54,5 +54,31 @@ std::unique_ptr<ILevel> createDefaultLevel(const ISession& i_session)
   wall3->setPosition({ 40, 0 });
   defaultLevel->addObject(wall3);
 
+  // Border
+
+  constexpr double Increment = 6.3;
+
+  for (double x = -30; x < 93; x += Increment)
+  {
+    auto wallTop = createWall();
+    wallTop->setPosition({ x, 45.3 });
+    defaultLevel->addObject(wallTop);
+
+    auto wallBottom = createWall();
+    wallBottom->setPosition({ x, -24 });
+    defaultLevel->addObject(wallBottom);
+  }
+
+  for (double y = -24 + Increment; y < 44; y += Increment)
+  {
+    auto wallLeft = createWall();
+    wallLeft->setPosition({ -30, y });
+    defaultLevel->addObject(wallLeft);
+
+    auto wallRight = createWall();
+    wallRight->setPosition({ 89.6, y });
+    defaultLevel->addObject(wallRight);
+  }
+
   return defaultLevel;
 }
