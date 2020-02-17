@@ -22,11 +22,15 @@ void Rocket::thrust()
 
 void Rocket::turnLeft()
 {
+  if (d_fuelTank.isEmpty())
+    return;
   setRotationSpeed(-5);
 }
 
 void Rocket::turnRight()
 {
+  if (d_fuelTank.isEmpty())
+    return;
   setRotationSpeed(5);
 }
 
