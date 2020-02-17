@@ -12,4 +12,6 @@ public:
 
   virtual void fire() = 0;
   virtual void changeWeapon() = 0;
+
+  virtual void refill() = 0;
 };

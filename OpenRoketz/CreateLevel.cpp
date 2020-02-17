@@ -14,45 +14,51 @@ std::unique_ptr<ILevel> createDefaultLevel(const ISession& i_session)
 {
   auto defaultLevel = std::make_unique<Level>();
 
+  // UTIL LAMBDAS
+
+  auto rocket = [&](double i_x, double i_y)
+  {
+    auto rocket = createRocket(i_session.getFuelTankName(),
+                               i_session.getEngineName(),
+                               i_session.getHullName());
+    CONTRACT_ASSERT(rocket);
+    rocket->setPosition({ i_x, i_y });
+    defaultLevel->addObject(rocket);
+    return rocket;
+  };
+
+  auto landingSite = [&](double i_x, double i_y)
+  {
+    auto obj = createLandingSite();
+    obj->setPosition({ i_x, i_y });
+    defaultLevel->addObject(obj);
+    return obj;
+  };
+
+  auto wall = [&](double i_x, double i_y)
+  {
+    auto obj = createWall();
+    obj->setPosition({ i_x, i_y });
+    defaultLevel->addObject(obj);
+    return obj;
+  };
+
+  // Level creation
+
   defaultLevel->setBackgroundTextureName("Space.png");
 
-  // Player
+  // Rockets
 
-  {
-    auto rocket = createRocket(i_session.getFuelTankName(),
-                               i_session.getEngineName(),
-                               i_session.getHullName());
-    CONTRACT_ASSERT(rocket);
-    rocket->setPosition({ 20, 20 });
-    defaultLevel->addObject(rocket);
+  auto player = rocket(20, 20);
+  defaultLevel->setControlledRocket(player);
 
-    defaultLevel->setControlledRocket(rocket);
-  }
+  rocket(40, 20);
 
-  // Enemy
+  // Landings
 
-  {
-    auto rocket = createRocket(i_session.getFuelTankName(),
-                               i_session.getEngineName(),
-                               i_session.getHullName());
-    CONTRACT_ASSERT(rocket);
-    rocket->setPosition({ 40, 20 });
-    defaultLevel->addObject(rocket);
-  }
-
-  // Scenery
-
-  auto wall1 = createWall();
-  wall1->setPosition({ 30, 20 });
-  defaultLevel->addObject(wall1);
-
-  auto wall2 = createWall();
-  wall2->setPosition({ 20, 0 });
-  defaultLevel->addObject(wall2);
-
-  auto wall3 = createWall();
-  wall3->setPosition({ 40, 0 });
-  defaultLevel->addObject(wall3);
+  landingSite(20, 0);
+  landingSite(30, 20);
+  landingSite(40, 0);
 
   // Border
 
@@ -60,24 +66,14 @@ std::unique_ptr<ILevel> createDefaultLevel(const ISession& i_session)
 
   for (double x = -30; x < 93; x += Increment)
   {
-    auto wallTop = createWall();
-    wallTop->setPosition({ x, 45.3 });
-    defaultLevel->addObject(wallTop);
-
-    auto wallBottom = createWall();
-    wallBottom->setPosition({ x, -24 });
-    defaultLevel->addObject(wallBottom);
+    wall(x, 45.3);
+    wall(x, -24);
   }
 
   for (double y = -24 + Increment; y < 44; y += Increment)
   {
-    auto wallLeft = createWall();
-    wallLeft->setPosition({ -30, y });
-    defaultLevel->addObject(wallLeft);
-
-    auto wallRight = createWall();
-    wallRight->setPosition({ 89.6, y });
-    defaultLevel->addObject(wallRight);
+    wall(-30, y);
+    wall(89.6, y);
   }
 
   return defaultLevel;

@@ -35,4 +35,9 @@ public:
   virtual Sdk::RectD getRect() const = 0;
   virtual bool isCollidable() const = 0;
   virtual void setCollidable(bool i_collidable) = 0;
+  virtual bool isRigid() const = 0;
+  virtual void setRigid(bool i_rigid) = 0;
+
+  virtual void addCollidedObject(std::shared_ptr<IInertial> i_object) = 0;
+  virtual void clearCollidedObjects() = 0;
 };

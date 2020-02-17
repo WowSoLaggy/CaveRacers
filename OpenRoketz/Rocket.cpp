@@ -55,7 +55,7 @@ const std::vector<Force>& Rocket::getActiveForces() const
 void Rocket::clearActiveForces()
 {
   d_activeForces.clear();
-  d_thrusting = false;
+  d_moving = false;
 }
 
 
@@ -83,8 +83,22 @@ void Rocket::setTextureName(std::string i_textureName)
 
 void Rocket::update(double i_dt)
 {
-  if (d_thrusting)
+  if (d_moving)
     d_fuelTank.waste(d_engine.getPrototype().getConsumption() * i_dt);
+
+  const bool landed = std::any_of(d_collidedObjects.cbegin(), d_collidedObjects.cend(), [](const auto& i_object) {
+    if (const auto* sceneObject = dynamic_cast<const ISceneObject*>(i_object.get()))
+      return sceneObject->getBehavior() == ObjectBehavior::LandingSite;
+    return false;
+  });
+  if (landed)
+    d_fuelTank.fill(i_dt * 10);
+}
+
+
+ObjectBehavior Rocket::getBehavior() const
+{
+  return ObjectBehavior::Default;
 }
 
 
@@ -128,6 +142,27 @@ bool Rocket::isCollidable() const
 void Rocket::setCollidable(bool i_collidable)
 {
   d_collidable = i_collidable;
+}
+
+bool Rocket::isRigid() const
+{
+  return d_rigid;
+}
+
+void Rocket::setRigid(bool i_rigid)
+{
+  d_rigid = i_rigid;
+}
+
+
+void Rocket::addCollidedObject(std::shared_ptr<IInertial> i_object)
+{
+  d_collidedObjects.push_back(std::move(i_object));
+}
+
+void Rocket::clearCollidedObjects()
+{
+  d_collidedObjects.clear();
 }
 
 

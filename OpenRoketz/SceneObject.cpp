@@ -87,6 +87,17 @@ const std::string& SceneObject::getTextureName() const
 }
 
 
+ObjectBehavior SceneObject::getBehavior() const
+{
+  return d_behavior;
+}
+
+void SceneObject::setBehavior(ObjectBehavior i_behavior)
+{
+  d_behavior = i_behavior;
+}
+
+
 Sdk::RectD SceneObject::getRect() const
 {
   constexpr double Size = 64.0 / 10;
@@ -106,4 +117,25 @@ bool SceneObject::isCollidable() const
 void SceneObject::setCollidable(bool i_collidable)
 {
   d_collidable = i_collidable;
+}
+
+bool SceneObject::isRigid() const
+{
+  return d_rigid;
+}
+
+void SceneObject::setRigid(bool i_rigid)
+{
+  d_rigid = i_rigid;
+}
+
+
+void SceneObject::addCollidedObject(std::shared_ptr<IInertial> i_object)
+{
+  d_collidedObjects.push_back(std::move(i_object));
+}
+
+void SceneObject::clearCollidedObjects()
+{
+  d_collidedObjects.clear();
 }

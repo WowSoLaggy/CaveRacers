@@ -25,12 +25,17 @@ void Game::handleKeyboard(const Dx::KeyboardState& i_keyboardState)
 
   if (d_level && d_level->getControlledObject())
   {
+    auto player = d_level->getControlledObject();
+
     if (currentKeys.W || currentKeys.Up)
-      d_level->getControlledObject()->thrust();
+      player->thrust();
     if (currentKeys.A || currentKeys.Left)
-      d_level->getControlledObject()->turnLeft();
+      player->turnLeft();
     if (currentKeys.D || currentKeys.Right)
-      d_level->getControlledObject()->turnRight();
+      player->turnRight();
+
+    if (pressedKeys.R)
+      player->refill();
   }
 
   if (d_scene)

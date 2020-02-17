@@ -40,11 +40,17 @@ public:
   virtual Sdk::RectD getRect() const override;
   virtual bool isCollidable() const override;
   virtual void setCollidable(bool i_collidable) override;
+  virtual bool isRigid() const override;
+  virtual void setRigid(bool i_rigid) override;
+
+  virtual void addCollidedObject(std::shared_ptr<IInertial> i_object) override;
+  virtual void clearCollidedObjects() override;
 
   // ISceneObject implementation
 
   virtual const std::string& getTextureName() const override;
   virtual void update(double i_dt) override;
+  virtual ObjectBehavior getBehavior() const override;
 
   // IRocketControl implementation
 
@@ -54,6 +60,8 @@ public:
 
   virtual void fire() override;
   virtual void changeWeapon() override;
+
+  virtual void refill() override;
 
   // IRocket implementation
 
@@ -74,8 +82,11 @@ private:
 
   bool d_gravityAffected = true;
   bool d_collidable = true;
+  bool d_rigid = true;
 
-  bool d_thrusting = false;
+  std::vector<std::shared_ptr<IInertial>> d_collidedObjects;
+
+  bool d_moving = false;
 
   std::string d_textureName;
 };

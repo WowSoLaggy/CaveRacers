@@ -284,6 +284,9 @@
     <ClInclude Include="LevelEvents.h">
       <Filter>src\LevelModel</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectBehavior.h">
+      <Filter>src\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GaugePanel.h">

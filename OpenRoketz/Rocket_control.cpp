@@ -17,7 +17,7 @@ void Rocket::thrust()
 
   addActiveForce(thrust);
 
-  d_thrusting = true;
+  d_moving = true;
 }
 
 void Rocket::turnLeft()
@@ -25,6 +25,7 @@ void Rocket::turnLeft()
   if (d_fuelTank.isEmpty())
     return;
   setRotationSpeed(-5);
+  d_moving = true;
 }
 
 void Rocket::turnRight()
@@ -32,6 +33,7 @@ void Rocket::turnRight()
   if (d_fuelTank.isEmpty())
     return;
   setRotationSpeed(5);
+  d_moving = true;
 }
 
 
@@ -41,4 +43,10 @@ void Rocket::fire()
 
 void Rocket::changeWeapon()
 {
+}
+
+
+void Rocket::refill()
+{
+  d_fuelTank.fill();
 }

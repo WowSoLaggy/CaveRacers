@@ -7,6 +7,7 @@ class SceneObject : public ISceneObject
 {
 public:
   void setTextureName(std::string i_textureName);
+  void setBehavior(ObjectBehavior i_behavior);
 
   // IInertial implementation
 
@@ -34,15 +35,25 @@ public:
   virtual Sdk::RectD getRect() const override;
   virtual bool isCollidable() const override;
   virtual void setCollidable(bool i_collidable) override;
+  virtual bool isRigid() const override;
+  virtual void setRigid(bool i_rigid) override;
+
+  virtual void addCollidedObject(std::shared_ptr<IInertial> i_object) override;
+  virtual void clearCollidedObjects() override;
 
   // ISceneObject implementation
 
   virtual const std::string& getTextureName() const override;
+  virtual ObjectBehavior getBehavior() const override;
 
 private:
   Sdk::Vector2D d_position;
 
   std::string d_textureName;
+  ObjectBehavior d_behavior = ObjectBehavior::Default;
 
   bool d_collidable = true;
+  bool d_rigid = true;
+
+  std::vector<std::shared_ptr<IInertial>> d_collidedObjects;
 };

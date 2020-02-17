@@ -52,6 +52,8 @@ void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_ob
   {
     CONTRACT_ASSERT(object);
 
+    object->clearCollidedObjects();
+
     std::vector<Sdk::Vector2D> normals;
     for (const auto& i_other : io_objects)
     {
@@ -59,7 +61,12 @@ void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_ob
         continue;
       const auto normal = getCollisionNormal(*object, *i_other);
       if (normal)
-        normals.push_back(*normal);
+      {
+        object->addCollidedObject(i_other);
+
+        if (object->isRigid() && i_other->isRigid())
+          normals.push_back(*normal);
+      }
     }
 
     updateObject(i_dt, *object, staticForceSum, normals);
@@ -87,7 +94,7 @@ void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const Force&
   {
     const auto& normalProjection = speed.dot(normal);
     if (normalProjection > 0)
-      speed = speed - normal * normalProjection * 1.5;
+      speed = speed - normal * normalProjection * 1.3;
 
     speed = speed * 0.9;
   }

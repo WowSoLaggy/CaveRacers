@@ -26,7 +26,15 @@ std::shared_ptr<Rocket> createRocket(const std::string& i_fuelTankName,
 
 std::shared_ptr<SceneObject> createWall()
 {
-  auto wall = std::make_shared<SceneObject>();
-  wall->setTextureName("Wall.png");
-  return wall;
+  auto object = std::make_shared<SceneObject>();
+  object->setTextureName("Wall.png");
+  return object;
+}
+
+std::shared_ptr<SceneObject> createLandingSite()
+{
+  auto object = std::make_shared<SceneObject>();
+  object->setTextureName("LandingSite.png");
+  object->setBehavior(ObjectBehavior::LandingSite);
+  return object;
 }

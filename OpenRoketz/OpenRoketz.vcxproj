@@ -213,6 +213,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="IPrototypeCollection.h" />
     <ClInclude Include="LevelEvents.h" />
+    <ClInclude Include="ObjectBehavior.h" />
     <ClInclude Include="PrototypeCollection.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Session.h" />
