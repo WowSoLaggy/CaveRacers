@@ -109,24 +109,19 @@ Sdk::RectD SceneObject::getRect() const
   return Sdk::RectD(left, left + Size, top, top + Size);
 }
 
-bool SceneObject::isCollidable() const
+bool SceneObject::isReceiveCollision() const
 {
-  return d_collidable;
+  return false;
 }
 
-void SceneObject::setCollidable(bool i_collidable)
+bool SceneObject::isSendCollision() const
 {
-  d_collidable = i_collidable;
+  return true;
 }
 
 bool SceneObject::isRigid() const
 {
-  return d_rigid;
-}
-
-void SceneObject::setRigid(bool i_rigid)
-{
-  d_rigid = i_rigid;
+  return true;
 }
 
 

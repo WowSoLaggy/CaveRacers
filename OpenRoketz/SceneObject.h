@@ -33,10 +33,9 @@ public:
   virtual void setGravityAffected(bool i_affected) override;
 
   virtual Sdk::RectD getRect() const override;
-  virtual bool isCollidable() const override;
-  virtual void setCollidable(bool i_collidable) override;
+  virtual bool isReceiveCollision() const override;
+  virtual bool isSendCollision() const override;
   virtual bool isRigid() const override;
-  virtual void setRigid(bool i_rigid) override;
 
   virtual void addCollidedObject(std::shared_ptr<IInertial> i_object) override;
   virtual void clearCollidedObjects() override;
@@ -53,7 +52,6 @@ private:
   ObjectBehavior d_behavior = ObjectBehavior::Default;
 
   bool d_collidable = true;
-  bool d_rigid = true;
 
   std::vector<std::shared_ptr<IInertial>> d_collidedObjects;
 };

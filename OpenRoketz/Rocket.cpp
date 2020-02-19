@@ -134,24 +134,19 @@ Sdk::RectD Rocket::getRect() const
   return Sdk::RectD(left, left + Size, top, top + Size);
 }
 
-bool Rocket::isCollidable() const
+bool Rocket::isReceiveCollision() const
 {
-  return d_collidable;
+  return true;
 }
 
-void Rocket::setCollidable(bool i_collidable)
+bool Rocket::isSendCollision() const
 {
-  d_collidable = i_collidable;
+  return true;
 }
 
 bool Rocket::isRigid() const
 {
-  return d_rigid;
-}
-
-void Rocket::setRigid(bool i_rigid)
-{
-  d_rigid = i_rigid;
+  return true;
 }
 
 

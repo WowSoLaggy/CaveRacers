@@ -8,7 +8,7 @@
 
 std::optional<Sdk::Vector2D> getCollisionNormal(const IInertial& i_left, const IInertial& i_right)
 {
-  if (!i_right.isCollidable() || !i_left.isCollidable())
+  if (!i_left.isReceiveCollision() || !i_right.isSendCollision())
     return std::nullopt;
 
   const auto leftRect = i_left.getRect();
