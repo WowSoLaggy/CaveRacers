@@ -43,13 +43,14 @@ BattleScene::BattleScene(ILevelView& io_levelView,
 void BattleScene::update(double i_dt)
 {
   d_time += i_dt;
+  d_dt = i_dt;
 
   if (const auto controlledObject = d_levelView.getControlledObjectView())
   {
     const auto position = controlledObject->getPosition();
     d_cameraOffset = { (int)(position.x * WorldScale), d_viewport.bottom() - (int)(position.y * WorldScale) };
   }
-
+  
   d_gui.update(i_dt);
 }
 
@@ -98,7 +99,8 @@ void BattleScene::render(Dx::IRenderer2d& i_renderer) const
 
   i_renderer.resetTranslation();
 
-  i_renderer.renderText(Sdk::toString(d_time, 2), d_font, { 0, 0 });
+  i_renderer.renderText("T: " + Sdk::toString(d_time, 2) +
+                        "; dt: " + Sdk::toString(d_dt, 3), d_font, { 0, 0 });
 
   if (const auto controlledObject = d_levelView.getControlledObjectView())
   {

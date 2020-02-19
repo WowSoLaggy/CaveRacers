@@ -32,6 +32,7 @@ private:
   std::optional<Dx::Sprite> d_background;
 
   double d_time = 0.0;
+  double d_dt = 0.0;
   const Dx::IFontResource& d_font;
 
   bool d_showDebug = false;
