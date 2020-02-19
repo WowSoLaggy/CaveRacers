@@ -11,8 +11,17 @@ Rocket::Rocket(FuelTank i_fuelTank, Engine i_engine, Hull i_hull)
   , d_engine(std::move(i_engine))
   , d_hull(std::move(i_hull))
 {
+  constexpr double Size = 32.0 / 10;
+  constexpr double HalfSize = Size / 2;
+
+  d_rect = Sdk::RectD(-HalfSize, HalfSize, -HalfSize, HalfSize);
 }
 
+
+double Rocket::getMaxSpeed() const
+{
+  return 30.0;
+}
 
 double Rocket::getMass() const
 {
@@ -125,13 +134,12 @@ void Rocket::setRotationSpeed(double i_rotationSpeed)
 
 Sdk::RectD Rocket::getRect() const
 {
-  constexpr double Size = 32.0 / 10;
-  constexpr double HalfSize = Size / 2;
+  return d_rect;
+}
 
-  const double left = getPosition().x - HalfSize;
-  const double top = getPosition().y - HalfSize;
-
-  return Sdk::RectD(left, left + Size, top, top + Size);
+void Rocket::setRect(Sdk::RectD i_rect)
+{
+  d_rect = std::move(i_rect);
 }
 
 bool Rocket::isReceiveCollision() const

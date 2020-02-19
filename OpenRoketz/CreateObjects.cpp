@@ -38,3 +38,13 @@ std::shared_ptr<SceneObject> createLandingSite()
   object->setBehavior(ObjectBehavior::LandingSite);
   return object;
 }
+
+
+std::shared_ptr<SceneObject> createProjectile()
+{
+  auto object = std::make_shared<SceneObject>();
+  object->setTextureName("Projectile.png");
+  constexpr double HalfSize = 8.0 / 2 / 10;
+  object->setRect({ -HalfSize, HalfSize, -HalfSize, HalfSize });
+  return object;
+}

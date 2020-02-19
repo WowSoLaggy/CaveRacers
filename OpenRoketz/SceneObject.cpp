@@ -2,6 +2,20 @@
 #include "SceneObject.h"
 
 
+SceneObject::SceneObject()
+{
+  constexpr double Size = 64.0 / 10;
+  constexpr double HalfSize = Size / 2;
+
+  d_rect = Sdk::RectD(-HalfSize, HalfSize, -HalfSize, HalfSize);
+}
+
+
+double SceneObject::getMaxSpeed() const
+{
+  return std::numeric_limits<double>::max();
+}
+
 double SceneObject::getMass() const
 {
   return 0;
@@ -20,22 +34,23 @@ void SceneObject::setPosition(Sdk::Vector2D i_position)
 
 const Sdk::Vector2D& SceneObject::getSpeed() const
 {
-  static const auto Empty = Sdk::Vector2D{};
-  return Empty;
+  return d_speed;
 }
 
 void SceneObject::setSpeed(Sdk::Vector2D i_speed)
 {
+  d_speed = std::move(i_speed);
 }
 
 
 double SceneObject::getRotation() const
 {
-  return 0;
+  return d_rotation;
 }
 
 void SceneObject::setRotation(double i_rotation)
 {
+  d_rotation = i_rotation;
 }
 
 
@@ -67,12 +82,12 @@ void SceneObject::clearActiveForces()
 
 bool SceneObject::isGravityAffected() const
 {
-  return false;
+  return d_gravityAffected;
 }
 
 void SceneObject::setGravityAffected(bool i_affected)
 {
-  CONTRACT_ASSERT(false);
+  d_gravityAffected = i_affected;
 }
 
 
@@ -100,13 +115,12 @@ void SceneObject::setBehavior(ObjectBehavior i_behavior)
 
 Sdk::RectD SceneObject::getRect() const
 {
-  constexpr double Size = 64.0 / 10;
-  constexpr double HalfSize = Size / 2;
+  return d_rect;
+}
 
-  const double left = getPosition().x - HalfSize;
-  const double top = getPosition().y - HalfSize;
-
-  return Sdk::RectD(left, left + Size, top, top + Size);
+void SceneObject::setRect(Sdk::RectD i_rect)
+{
+  d_rect = std::move(i_rect);
 }
 
 bool SceneObject::isReceiveCollision() const

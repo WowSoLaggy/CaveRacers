@@ -9,3 +9,5 @@ std::shared_ptr<Rocket> createRocket(const std::string& i_fuelTankName,
 
 std::shared_ptr<SceneObject> createWall();
 std::shared_ptr<SceneObject> createLandingSite();
+
+std::shared_ptr<SceneObject> createProjectile();

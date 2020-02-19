@@ -6,11 +6,15 @@
 class SceneObject : public ISceneObject
 {
 public:
+  SceneObject();
+
   void setTextureName(std::string i_textureName);
   void setBehavior(ObjectBehavior i_behavior);
+  void setRect(Sdk::RectD i_rect);
 
   // IInertial implementation
 
+  virtual double getMaxSpeed() const override;
   virtual double getMass() const override;
 
   virtual const Sdk::Vector2D& getPosition() const override;
@@ -47,11 +51,16 @@ public:
 
 private:
   Sdk::Vector2D d_position;
+  Sdk::Vector2D d_speed;
+  Sdk::RectD d_rect;
+
+  double d_rotation = 0.0;
 
   std::string d_textureName;
   ObjectBehavior d_behavior = ObjectBehavior::Default;
 
   bool d_collidable = true;
+  bool d_gravityAffected = false;
 
   std::vector<std::shared_ptr<IInertial>> d_collidedObjects;
 };

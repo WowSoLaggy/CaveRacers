@@ -33,6 +33,8 @@ std::shared_ptr<IRocketControl> Level::getControlledObject() const
 
 void Level::addObject(std::shared_ptr<ISceneObject> i_object)
 {
+  CONTRACT_EXPECT(i_object);
+  i_object->setLevel(this);
   d_objects.push_back(std::move(i_object));
 }
 

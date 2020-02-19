@@ -11,4 +11,5 @@ public:
   virtual void update(double i_dt) = 0;
 
   virtual std::shared_ptr<IRocketControl> getControlledObject() const = 0;
+  virtual void addObject(std::shared_ptr<ISceneObject> i_object) = 0;
 };

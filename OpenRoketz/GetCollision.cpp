@@ -11,8 +11,11 @@ std::optional<Sdk::Vector2D> getCollisionNormal(const IInertial& i_left, const I
   if (!i_left.isReceiveCollision() || !i_right.isSendCollision())
     return std::nullopt;
 
-  const auto leftRect = i_left.getRect();
-  const auto rightRect = i_right.getRect();
+  auto leftRect = i_left.getRect();
+  auto rightRect = i_right.getRect();
+
+  leftRect.move(i_left.getPosition());
+  rightRect.move(i_right.getPosition());
 
   const bool isCollision = leftRect.intersectRect(rightRect);
   if (!isCollision)

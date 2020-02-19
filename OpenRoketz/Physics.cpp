@@ -30,9 +30,8 @@ namespace
     auto speed = io_object.getSpeed() + i_acceleration * i_dt;
 
     const auto speedValue = speed.length();
-    constexpr double MaxSpeed = 30;
-    if (speedValue > MaxSpeed)
-      speed = speed * MaxSpeed / speedValue;
+    if (speedValue > io_object.getMaxSpeed())
+      speed = speed * io_object.getMaxSpeed() / speedValue;
 
     return speed;
   }
@@ -94,7 +93,7 @@ void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const Force&
   {
     const auto& normalProjection = speed.dot(normal);
     if (normalProjection > 0)
-      speed = speed - normal * normalProjection * 1.3;
+      speed = speed - normal * normalProjection * 1.5;
 
     speed = speed * 0.9;
   }

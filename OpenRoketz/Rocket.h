@@ -13,9 +13,11 @@ public:
   Rocket(FuelTank i_fuelTank, Engine i_engine, Hull i_hull);
 
   void setTextureName(std::string i_textureName);
+  void setRect(Sdk::RectD i_rect);
   
   // IInertial implementation
 
+  virtual double getMaxSpeed() const override;
   virtual double getMass() const override;
 
   virtual const Sdk::Vector2D& getPosition() const override;
@@ -57,8 +59,7 @@ public:
   virtual void turnLeft() override;
   virtual void turnRight() override;
 
-  virtual void fire() override;
-  virtual void changeWeapon() override;
+  virtual void fire1() override;
 
   virtual void refill() override;
 
@@ -73,6 +74,7 @@ private:
 
   Sdk::Vector2D d_position;
   Sdk::Vector2D d_speed;
+  Sdk::RectD d_rect;
 
   double d_rotation = 0.0;
   double d_rotationSpeed = 0.0;

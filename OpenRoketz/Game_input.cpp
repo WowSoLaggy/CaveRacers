@@ -34,6 +34,9 @@ void Game::handleKeyboard(const Dx::KeyboardState& i_keyboardState)
     if (currentKeys.D || currentKeys.Right)
       player->turnRight();
 
+    if (pressedKeys.OemPeriod)
+      player->fire1();
+
     if (pressedKeys.R)
       player->refill();
   }

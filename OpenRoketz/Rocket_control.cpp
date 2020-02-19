@@ -1,7 +1,19 @@
 #include "stdafx.h"
 #include "Rocket.h"
 
+#include "CreateObjects.h"
 #include "IEnginePrototype.h"
+#include "ILevelModel.h"
+#include "SceneObject.h"
+
+
+namespace
+{
+  Sdk::Vector2D getDirection(double i_rotation)
+  {
+    return { std::sin(i_rotation), std::cos(i_rotation) };
+  }
+}
 
 
 void Rocket::thrust()
@@ -10,10 +22,7 @@ void Rocket::thrust()
     return;
 
   const auto thrustPower = d_engine.getPrototype().getPower();
-
-  const double y = std::cos(getRotation());
-  const double x = std::sin(getRotation());
-  const Force thrust = Sdk::Vector2D{ x, y } * thrustPower;
+  const Force thrust = getDirection(getRotation()) * thrustPower;
 
   addActiveForce(thrust);
 
@@ -37,12 +46,23 @@ void Rocket::turnRight()
 }
 
 
-void Rocket::fire()
+void Rocket::fire1()
 {
-}
+  auto* level = getLevel();
+  CONTRACT_ASSERT(level);
 
-void Rocket::changeWeapon()
-{
+  auto projectile = createProjectile();
+  CONTRACT_ASSERT(projectile);
+
+  projectile->setPosition(getPosition());
+  projectile->setRotation(getRotation());
+
+  projectile->setGravityAffected(true);
+
+  const auto projectileSpeed = getDirection(getRotation()) * 75;
+  projectile->setSpeed(projectileSpeed);
+
+  level->addObject(projectile);
 }
 
 

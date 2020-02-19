@@ -84,6 +84,7 @@ void BattleScene::render(Dx::IRenderer2d& i_renderer) const
       continue;
 
     auto collisionRect = objectView->getRect();
+    collisionRect.move(objectView->getPosition());
     collisionRect.p1 = collisionRect.p1 * WorldScale;
     collisionRect.p2 = collisionRect.p2 * WorldScale;
     collisionRect.p1.y = d_viewport.bottom() - collisionRect.p1.y;

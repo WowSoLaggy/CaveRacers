@@ -1,7 +1,8 @@
 #pragma once
 
-#include "ObjectBehavior.h"
+#include "Fwd.h"
 #include "IInertial.h"
+#include "ObjectBehavior.h"
 
 #include <Sdk/Vector.h>
 
@@ -14,4 +15,10 @@ public:
   virtual void update(double i_dt) { }
 
   virtual ObjectBehavior getBehavior() const = 0;
+
+  ILevelModel* getLevel() const { return d_levelModel; }
+  void setLevel(ILevelModel* i_levelModel) { d_levelModel = i_levelModel; }
+
+private:
+  ILevelModel* d_levelModel = nullptr;
 };

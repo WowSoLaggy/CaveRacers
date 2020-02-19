@@ -16,7 +16,8 @@ public:
 
   virtual std::shared_ptr<IRocketControl> getControlledObject() const override;
 
-  void addObject(std::shared_ptr<ISceneObject> i_object);
+  virtual void addObject(std::shared_ptr<ISceneObject> i_object) override;
+
   void setControlledRocket(std::shared_ptr<IRocket> i_rocket);
 
   Physics& getPhysics();

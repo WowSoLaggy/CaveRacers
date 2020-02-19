@@ -11,6 +11,7 @@ class IInertial
 public:
   virtual ~IInertial() = default;
 
+  virtual double getMaxSpeed() const = 0;
   virtual double getMass() const = 0;
   
   virtual const Sdk::Vector2D& getPosition() const = 0;

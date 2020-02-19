@@ -10,8 +10,7 @@ public:
   virtual void turnLeft() = 0;
   virtual void turnRight() = 0;
 
-  virtual void fire() = 0;
-  virtual void changeWeapon() = 0;
+  virtual void fire1() = 0;
 
   virtual void refill() = 0;
 };
