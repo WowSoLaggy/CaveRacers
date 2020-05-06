@@ -11,6 +11,7 @@ public:
   void setTextureName(std::string i_textureName);
   void setBehavior(ObjectBehavior i_behavior);
   void setRect(Sdk::RectD i_rect);
+  void setRigid(bool i_rigid);
 
   // IInertial implementation
 
@@ -61,6 +62,7 @@ private:
 
   bool d_collidable = true;
   bool d_gravityAffected = false;
+  bool d_rigid = true;
 
   std::vector<std::shared_ptr<IInertial>> d_collidedObjects;
 };

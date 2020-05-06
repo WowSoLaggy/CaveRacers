@@ -133,9 +133,15 @@ bool SceneObject::isSendCollision() const
   return true;
 }
 
+
 bool SceneObject::isRigid() const
 {
-  return true;
+  return d_rigid;
+}
+
+void SceneObject::setRigid(bool i_rigid)
+{
+  d_rigid = i_rigid;
 }
 
 
