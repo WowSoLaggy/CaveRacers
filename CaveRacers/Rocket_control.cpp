@@ -54,15 +54,15 @@ void Rocket::fire1()
   auto projectile = createProjectile();
   CONTRACT_ASSERT(projectile);
 
-  projectile->setPosition(getPosition());
-  projectile->setRotation(getRotation());
-
   projectile->setGravityAffected(true);
 
   projectile->setBehavior(ObjectBehavior::Projectile);
 
-  const auto projectileSpeed = getSpeed() + getDirection(getRotation()) * 75;
+  const auto shootDirection = getDirection(getRotation());
+  const auto projectileSpeed = getSpeed() + shootDirection * 75;
   projectile->setSpeed(projectileSpeed);
+
+  projectile->setPosition(getPosition() + shootDirection * 2.5);
 
   level->addObject(projectile);
 }
