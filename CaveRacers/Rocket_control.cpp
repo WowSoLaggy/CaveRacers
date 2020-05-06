@@ -59,7 +59,7 @@ void Rocket::fire1()
 
   projectile->setGravityAffected(true);
 
-  const auto projectileSpeed = getDirection(getRotation()) * 75;
+  const auto projectileSpeed = getSpeed() + getDirection(getRotation()) * 75;
   projectile->setSpeed(projectileSpeed);
 
   level->addObject(projectile);
