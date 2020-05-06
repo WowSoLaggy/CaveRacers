@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "SceneObject.h"
 
+#include <Sdk/Math.h>
+
 
 SceneObject::SceneObject()
 {
@@ -8,6 +10,16 @@ SceneObject::SceneObject()
   constexpr double HalfSize = Size / 2;
 
   d_rect = Sdk::RectD(-HalfSize, HalfSize, -HalfSize, HalfSize);
+}
+
+
+void SceneObject::update(double i_dt)
+{
+  if (getBehavior() == ObjectBehavior::Projectile)
+  {
+    const auto& speed = getSpeed();
+    setRotation(-std::atan2(speed.y, speed.x) + Sdk::PiHalf);
+  }
 }
 
 

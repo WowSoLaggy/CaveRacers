@@ -47,6 +47,8 @@ public:
 
   // ISceneObject implementation
 
+  virtual void update(double i_dt) override;
+
   virtual const std::string& getTextureName() const override;
   virtual ObjectBehavior getBehavior() const override;
 

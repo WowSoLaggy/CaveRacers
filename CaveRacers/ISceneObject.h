@@ -12,7 +12,7 @@ class ISceneObject : public IInertial
 public:
   virtual const std::string& getTextureName() const = 0;
 
-  virtual void update(double i_dt) { }
+  virtual void update(double i_dt) = 0;
 
   virtual ObjectBehavior getBehavior() const = 0;
 
