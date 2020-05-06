@@ -28,10 +28,17 @@ double SceneObject::getMaxSpeed() const
   return std::numeric_limits<double>::max();
 }
 
+
 double SceneObject::getMass() const
 {
-  return 0;
+  return d_mass;
 }
+
+void SceneObject::setMass(double i_mass)
+{
+  d_mass = i_mass;
+}
+
 
 const Sdk::Vector2D& SceneObject::getPosition() const
 {

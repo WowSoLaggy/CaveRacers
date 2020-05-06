@@ -8,6 +8,8 @@ class SceneObject : public ISceneObject
 public:
   SceneObject();
 
+  void setMass(double i_mass);
+
   void setTextureName(std::string i_textureName);
   void setBehavior(ObjectBehavior i_behavior);
   void setRect(Sdk::RectD i_rect);
@@ -61,6 +63,8 @@ private:
 
   std::string d_textureName;
   ObjectBehavior d_behavior = ObjectBehavior::Default;
+
+  double d_mass = 0;
 
   bool d_collidable = true;
   bool d_gravityAffected = false;
