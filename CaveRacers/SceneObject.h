@@ -13,6 +13,8 @@ public:
   void setTextureName(std::string i_textureName);
   void setBehavior(ObjectBehavior i_behavior);
   void setRect(Sdk::RectD i_rect);
+  void setSendCollision(bool i_sendCollision);
+  void setReceiveCollision(bool i_receiveCollision);
   void setRigid(bool i_rigid);
 
   // IInertial implementation
@@ -69,6 +71,8 @@ private:
   bool d_collidable = true;
   bool d_gravityAffected = false;
   bool d_rigid = true;
+  bool d_sendCollision = true;
+  bool d_receiveCollision = true;
 
   std::vector<std::shared_ptr<IInertial>> d_collidedObjects;
 };

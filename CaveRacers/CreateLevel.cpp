@@ -38,6 +38,7 @@ std::unique_ptr<ILevel> createDefaultLevel(const ISession& i_session)
   auto wall = [&](double i_x, double i_y)
   {
     auto obj = createWall();
+    obj->setReceiveCollision(false);
     obj->setPosition({ i_x, i_y });
     defaultLevel->addObject(obj);
     return obj;

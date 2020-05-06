@@ -142,14 +142,25 @@ void SceneObject::setRect(Sdk::RectD i_rect)
   d_rect = std::move(i_rect);
 }
 
+
 bool SceneObject::isReceiveCollision() const
 {
-  return false;
+  return d_receiveCollision;
+}
+
+void SceneObject::setReceiveCollision(bool i_receiveCollision)
+{
+  d_receiveCollision = i_receiveCollision;
 }
 
 bool SceneObject::isSendCollision() const
 {
-  return true;
+  return d_sendCollision;
+}
+
+void SceneObject::setSendCollision(bool i_sendCollision)
+{
+  d_sendCollision = i_sendCollision;
 }
 
 
