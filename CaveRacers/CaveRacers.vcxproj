@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{B694DC21-C44C-4CAD-A1D2-5E7535FA3911}</ProjectGuid>
-    <RootNamespace>OpenRoketz</RootNamespace>
+    <RootNamespace>CaveRacers</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

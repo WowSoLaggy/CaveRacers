@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenRoketz", "OpenRoketz\OpenRoketz.vcxproj", "{B694DC21-C44C-4CAD-A1D2-5E7535FA3911}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CaveRacers", "CaveRacers\CaveRacers.vcxproj", "{B694DC21-C44C-4CAD-A1D2-5E7535FA3911}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{A11BB460-12EB-4642-AAC1-EFDEF9ACC63D}"
 EndProject
