@@ -44,28 +44,33 @@ namespace
 
 void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_objects) const
 {
-  for (auto& object : io_objects)
+  for (auto& objectPtr : io_objects)
   {
-    CONTRACT_ASSERT(object);
+    CONTRACT_ASSERT(objectPtr);
+    auto& object = *objectPtr;
 
-    object->clearCollidedObjects();
+    object.clearCollidedObjects();
 
     std::vector<Sdk::Vector2D> normals;
-    for (const auto& i_other : io_objects)
+    for (const auto& otherPtr : io_objects)
     {
-      if (object.get() == i_other.get())
+      CONTRACT_ASSERT(otherPtr);
+      auto& other = *otherPtr;
+
+      if (&object == &other)
         continue;
-      const auto normal = getCollisionNormal(*object, *i_other);
+
+      const auto normal = getCollisionNormal(object, other);
       if (normal)
       {
-        object->addCollidedObject(i_other);
+        object.addCollidedObject(otherPtr);
 
-        if (object->isRigid() && i_other->isRigid())
+        if (object.isRigid() && other.isRigid())
           normals.push_back(*normal);
       }
     }
 
-    updateObject(i_dt, *object, normals);
+    updateObject(i_dt, object, normals);
   }
 }
 
