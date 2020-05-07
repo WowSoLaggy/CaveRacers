@@ -4,12 +4,13 @@
 #include "IInertial.h"
 
 #include <Sdk/Math.h>
+#include <Sdk/Vector.h>
 
 
-std::optional<Sdk::Vector2D> getCollisionNormal(const IInertial& i_left, const IInertial& i_right)
+CollisionInfo getCollision(const IInertial& i_left, const IInertial& i_right)
 {
   if (!i_left.isReceiveCollision() || !i_right.isSendCollision())
-    return std::nullopt;
+    return { i_left, i_right, false, Sdk::Vector2D::zero() };
 
   auto leftRect = i_left.getRect();
   auto rightRect = i_right.getRect();
@@ -19,16 +20,28 @@ std::optional<Sdk::Vector2D> getCollisionNormal(const IInertial& i_left, const I
 
   const bool isCollision = leftRect.intersectRect(rightRect);
   if (!isCollision)
-    return std::nullopt;
+    return { i_left, i_right, false, Sdk::Vector2D::zero() };
 
+  Sdk::Vector2D normal;
   const auto side = Sdk::getSide(leftRect.center() - rightRect.center());
   switch (side)
   {
-  case Sdk::Side::Up: return Sdk::Vector2D{ 0, -1 };
-  case Sdk::Side::Down: return Sdk::Vector2D{ 0, 1 };
-  case Sdk::Side::Left: return Sdk::Vector2D{ 1, 0 };
-  case Sdk::Side::Right: return Sdk::Vector2D{ -1, 0 };
+  case Sdk::Side::Up:
+    normal = Sdk::Vector2D{ 0, -1 };
+    break;
+  case Sdk::Side::Down:
+    normal = Sdk::Vector2D{ 0, 1 };
+    break;
+  case Sdk::Side::Left:
+    normal = Sdk::Vector2D{ 1, 0 };
+    break;
+  case Sdk::Side::Right:
+    normal = Sdk::Vector2D{ -1, 0 };
+    break;
+
+  default:
+    CONTRACT_ASSERT(false);
   }
 
-  CONTRACT_ASSERT(false);
+  return { i_left, i_right, true, normal };
 }

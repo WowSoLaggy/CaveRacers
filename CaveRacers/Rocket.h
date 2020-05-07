@@ -44,8 +44,9 @@ public:
   virtual bool isSendCollision() const override;
   virtual bool isRigid() const override;
 
-  virtual void addCollidedObject(std::shared_ptr<IInertial> i_object) override;
-  virtual void clearCollidedObjects() override;
+  virtual void addCollision(CollisionInfo i_collisionInfo) override;
+  virtual const std::vector<CollisionInfo>& getCollisions() const override;
+  virtual void clearCollisions() override;
 
   // ISceneObject implementation
 
@@ -83,7 +84,7 @@ private:
 
   bool d_gravityAffected = true;
 
-  std::vector<std::shared_ptr<IInertial>> d_collidedObjects;
+  std::vector<CollisionInfo> d_collisions;
 
   bool d_moving = false;
 

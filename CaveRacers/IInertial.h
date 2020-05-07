@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CollisionInfo.h"
 #include "Force.h"
 
 #include <Sdk/Rect.h>
@@ -38,6 +39,7 @@ public:
   virtual bool isSendCollision() const = 0;
   virtual bool isRigid() const = 0;
 
-  virtual void addCollidedObject(std::shared_ptr<IInertial> i_object) = 0;
-  virtual void clearCollidedObjects() = 0;
+  virtual void addCollision(CollisionInfo i_collisionInfo) = 0;
+  virtual const std::vector<CollisionInfo>& getCollisions() const = 0;
+  virtual void clearCollisions() = 0;
 };

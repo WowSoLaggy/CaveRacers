@@ -287,6 +287,9 @@
     <ClInclude Include="ObjectBehavior.h">
       <Filter>src\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionInfo.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="GaugePanel.h">

@@ -49,9 +49,8 @@ void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_ob
     CONTRACT_ASSERT(objectPtr);
     auto& object = *objectPtr;
 
-    object.clearCollidedObjects();
+    object.clearCollisions();
 
-    std::vector<Sdk::Vector2D> normals;
     for (const auto& otherPtr : io_objects)
     {
       CONTRACT_ASSERT(otherPtr);
@@ -60,27 +59,24 @@ void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_ob
       if (&object == &other)
         continue;
 
-      const auto normal = getCollisionNormal(object, other);
-      if (normal)
-      {
-        object.addCollidedObject(otherPtr);
+      const auto collision = getCollision(object, other);
+      if (!collision.isCollision)
+        continue;
 
-        if (object.isRigid() && other.isRigid())
-          normals.push_back(*normal);
-      }
+      object.addCollision(std::move(collision));
     }
 
-    updateObject(i_dt, object, normals);
+    updateObject(i_dt, object);
   }
 }
 
-void Physics::updateObject(double i_dt, IInertial& io_object, const std::vector<Sdk::Vector2D>& i_normals) const
+void Physics::updateObject(double i_dt, IInertial& io_object) const
 {
-  updateObjectLinear(i_dt, io_object, i_normals);
+  updateObjectLinear(i_dt, io_object);
   updateObjectRotation(i_dt, io_object);
 }
 
-void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const std::vector<Sdk::Vector2D>& i_normals) const
+void Physics::updateObjectLinear(double i_dt, IInertial& io_object) const
 {
   auto acceleration = getAcceleration(io_object);
   if (acceleration.lengthSq() < MovementThreshold)
@@ -89,11 +85,16 @@ void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const std::v
   auto speed = getSpeed(io_object, acceleration, i_dt);
 
   // Remove collisions
-  for (const auto& normal : i_normals)
+  for (const auto& collision : io_object.getCollisions())
   {
-    const auto& normalProjection = speed.dot(normal);
+    CONTRACT_ENSURE(collision.isCollision);
+
+    if (!collision.receiver.isRigid() || !collision.sender.isRigid())
+      continue;
+
+    const auto& normalProjection = speed.dot(collision.normal);
     if (normalProjection > 0)
-      speed = speed - normal * normalProjection * 1.5;
+      speed = speed - collision.normal * normalProjection * 1.5;
 
     speed = speed * 0.9;
   }

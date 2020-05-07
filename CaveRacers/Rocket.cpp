@@ -95,8 +95,8 @@ void Rocket::update(double i_dt)
   if (d_moving)
     d_fuelTank.waste(d_engine.getPrototype().getConsumption() * i_dt);
 
-  const bool landed = std::any_of(d_collidedObjects.cbegin(), d_collidedObjects.cend(), [](const auto& i_object) {
-    if (const auto* sceneObject = dynamic_cast<const ISceneObject*>(i_object.get()))
+  const bool landed = std::any_of(d_collisions.cbegin(), d_collisions.cend(), [](const auto& i_collision) {
+    if (const auto* sceneObject = dynamic_cast<const ISceneObject*>(&i_collision.sender))
       return sceneObject->getBehavior() == ObjectBehavior::LandingSite;
     return false;
   });
@@ -158,14 +158,19 @@ bool Rocket::isRigid() const
 }
 
 
-void Rocket::addCollidedObject(std::shared_ptr<IInertial> i_object)
+void Rocket::addCollision(CollisionInfo i_collisionInfo)
 {
-  d_collidedObjects.push_back(std::move(i_object));
+  d_collisions.push_back(std::move(i_collisionInfo));
 }
 
-void Rocket::clearCollidedObjects()
+const std::vector<CollisionInfo>& Rocket::getCollisions() const
 {
-  d_collidedObjects.clear();
+  return d_collisions;
+}
+
+void Rocket::clearCollisions()
+{
+  d_collisions.clear();
 }
 
 

@@ -183,6 +183,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="BattleScene.h" />
+    <ClInclude Include="CollisionInfo.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="CreateGame.h" />
     <ClInclude Include="CreateLevel.h" />

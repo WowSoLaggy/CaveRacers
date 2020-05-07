@@ -175,12 +175,17 @@ void SceneObject::setRigid(bool i_rigid)
 }
 
 
-void SceneObject::addCollidedObject(std::shared_ptr<IInertial> i_object)
+void SceneObject::addCollision(CollisionInfo i_collisionInfo)
 {
-  d_collidedObjects.push_back(std::move(i_object));
+  d_collisions.push_back(std::move(i_collisionInfo));
 }
 
-void SceneObject::clearCollidedObjects()
+const std::vector<CollisionInfo>& SceneObject::getCollisions() const
 {
-  d_collidedObjects.clear();
+  return d_collisions;
+}
+
+void SceneObject::clearCollisions()
+{
+  d_collisions.clear();
 }
