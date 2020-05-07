@@ -9,10 +9,9 @@ namespace
 {
   constexpr double MovementThreshold = 0.01;
 
-  Sdk::Vector2D getAcceleration(IInertial& io_object, const Force& i_staticForceSum)
+  Sdk::Vector2D getAcceleration(IInertial& io_object)
   {
-    auto sumForce = i_staticForceSum;
-
+    Force sumForce;
     for (const auto& force : io_object.getActiveForces())
       sumForce += force;
     io_object.clearActiveForces();
@@ -45,8 +44,6 @@ namespace
 
 void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_objects) const
 {
-  const auto staticForceSum = getStaticForcesSum();
-
   for (auto& object : io_objects)
   {
     CONTRACT_ASSERT(object);
@@ -68,21 +65,19 @@ void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_ob
       }
     }
 
-    updateObject(i_dt, *object, staticForceSum, normals);
+    updateObject(i_dt, *object, normals);
   }
 }
 
-void Physics::updateObject(double i_dt, IInertial& io_object, const Force& i_staticForceSum,
-                           const std::vector<Sdk::Vector2D>& i_normals) const
+void Physics::updateObject(double i_dt, IInertial& io_object, const std::vector<Sdk::Vector2D>& i_normals) const
 {
-  updateObjectLinear(i_dt, io_object, i_staticForceSum, i_normals);
+  updateObjectLinear(i_dt, io_object, i_normals);
   updateObjectRotation(i_dt, io_object);
 }
 
-void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const Force& i_staticForceSum,
-                                 const std::vector<Sdk::Vector2D>& i_normals) const
+void Physics::updateObjectLinear(double i_dt, IInertial& io_object, const std::vector<Sdk::Vector2D>& i_normals) const
 {
-  auto acceleration = getAcceleration(io_object, i_staticForceSum);
+  auto acceleration = getAcceleration(io_object);
   if (acceleration.lengthSq() < MovementThreshold)
     acceleration = {};
 
@@ -119,18 +114,4 @@ void Physics::updateObjectRotation(double i_dt, IInertial& io_object) const
     return;
 
   io_object.setRotation(io_object.getRotation() + rotationSpeed * i_dt);
-}
-
-
-void Physics::addStaticForce(Force i_staticForce)
-{
-  d_staticForces.push_back(std::move(i_staticForce));
-}
-
-Force Physics::getStaticForcesSum() const
-{
-  Force sumForce;
-  for (const auto& force : d_staticForces)
-    sumForce += force;
-  return sumForce;
 }
