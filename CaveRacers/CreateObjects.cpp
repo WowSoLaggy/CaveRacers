@@ -46,5 +46,9 @@ std::shared_ptr<SceneObject> createProjectile()
   object->setTextureName("Projectile.png");
   constexpr double HalfSize = 8.0 / 2 / 10;
   object->setRect({ -HalfSize, HalfSize, -HalfSize, HalfSize });
+
+  object->setGravityAffected(true);
+  object->setBehavior(ObjectBehavior::Projectile);
+
   return object;
 }
