@@ -1,9 +1,6 @@
 #pragma once
 
-#include "Force.h"
-#include "IInertial.h"
-
-#include <Sdk/Vector.h>
+#include "Fwd.h"
 
 
 class Physics
