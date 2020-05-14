@@ -13,7 +13,7 @@ namespace
   {
     return { std::sin(i_rotation), std::cos(i_rotation) };
   }
-}
+} // anonymous NS
 
 
 void Rocket::thrust()

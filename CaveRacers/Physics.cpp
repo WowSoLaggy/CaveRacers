@@ -93,7 +93,8 @@ namespace
     updateObjectLinear(i_dt, io_object);
     updateObjectRotation(i_dt, io_object);
   }
-}
+
+} // anonymous NS
 
 
 void updatePhysics(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_objects)
