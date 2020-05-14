@@ -101,24 +101,20 @@ void updatePhysics(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_obje
 {
   for (auto& objectPtr : io_objects)
   {
-    CONTRACT_ASSERT(objectPtr);
-    auto& object = *objectPtr;
+    auto& object = CONTRACT_DEREF(objectPtr);
 
     object.clearCollisions();
 
     for (const auto& otherPtr : io_objects)
     {
-      CONTRACT_ASSERT(otherPtr);
-      auto& other = *otherPtr;
+      auto& other = CONTRACT_DEREF(otherPtr);
 
       if (&object == &other)
         continue;
 
       const auto collision = getCollision(object, other);
-      if (!collision.isCollision)
-        continue;
-
-      object.addCollision(std::move(collision));
+      if (collision.isCollision)
+        object.addCollision(std::move(collision));
     }
 
     updateObject(i_dt, object);
