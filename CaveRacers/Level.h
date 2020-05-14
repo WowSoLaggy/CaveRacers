@@ -2,7 +2,6 @@
 
 #include "Fwd.h"
 #include "ILevel.h"
-#include "Physics.h"
 
 
 class Level : public ILevel
@@ -20,13 +19,10 @@ public:
 
   void setControlledRocket(std::shared_ptr<IRocket> i_rocket);
 
-  Physics& getPhysics();
-
   virtual void update(double i_dt) override;
 
 private:
   std::optional<std::string> d_backgroundTextureName;
-  Physics d_physics;
   std::vector<std::shared_ptr<ISceneObject>> d_objects;
 
   std::weak_ptr<IRocket> d_controlledRocket;

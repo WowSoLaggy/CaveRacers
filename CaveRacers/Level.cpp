@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Level.h"
 
+#include "Physics.h"
 #include "Rocket.h"
 
 
@@ -44,17 +45,11 @@ void Level::setControlledRocket(std::shared_ptr<IRocket> i_rocket)
 }
 
 
-Physics& Level::getPhysics()
-{
-  return d_physics;
-}
-
-
 void Level::update(double i_dt)
 {
   for (auto& object : d_objects)
     object->update(i_dt);
 
   auto inertials = std::vector<std::shared_ptr<IInertial>>{d_objects.begin(), d_objects.end()};
-  d_physics.update(i_dt, inertials);
+  updatePhysics(i_dt, inertials);
 }

@@ -40,10 +40,63 @@ namespace
   {
     return io_object.getPosition() + i_speed * i_dt;
   }
+
+
+  void updateObjectLinear(double i_dt, IInertial& io_object)
+  {
+    auto acceleration = getAcceleration(io_object);
+    if (acceleration.lengthSq() < MovementThreshold)
+      acceleration = {};
+
+    auto speed = getSpeed(io_object, acceleration, i_dt);
+
+    // Remove collisions
+    for (const auto& collision : io_object.getCollisions())
+    {
+      CONTRACT_ENSURE(collision.isCollision);
+
+      if (!collision.receiver.isRigid() || !collision.sender.isRigid())
+        continue;
+
+      const auto& normalProjection = speed.dot(collision.normal);
+      if (normalProjection > 0)
+        speed = speed - collision.normal * normalProjection * 1.5;
+
+      speed = speed * 0.9;
+    }
+
+    if (speed.lengthSq() < MovementThreshold)
+    {
+      io_object.setSpeed({ 0, 0 });
+      return;
+    }
+
+    io_object.setSpeed(speed);
+
+    const auto position = getPosition(io_object, speed, i_dt);
+    io_object.setPosition(position);
+  }
+
+  void updateObjectRotation(double i_dt, IInertial& io_object)
+  {
+    constexpr double MovementThreshold = 0.0001;
+    const auto rotationSpeed = io_object.getRotationSpeed();
+    io_object.setRotationSpeed(0);
+    if (std::abs(rotationSpeed) < MovementThreshold)
+      return;
+
+    io_object.setRotation(io_object.getRotation() + rotationSpeed * i_dt);
+  }
+
+  void updateObject(double i_dt, IInertial& io_object)
+  {
+    updateObjectLinear(i_dt, io_object);
+    updateObjectRotation(i_dt, io_object);
+  }
 }
 
 
-void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_objects) const
+void updatePhysics(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_objects)
 {
   for (auto& objectPtr : io_objects)
   {
@@ -69,56 +122,4 @@ void Physics::update(double i_dt, std::vector<std::shared_ptr<IInertial>>& io_ob
 
     updateObject(i_dt, object);
   }
-}
-
-void Physics::updateObject(double i_dt, IInertial& io_object) const
-{
-  updateObjectLinear(i_dt, io_object);
-  updateObjectRotation(i_dt, io_object);
-}
-
-void Physics::updateObjectLinear(double i_dt, IInertial& io_object) const
-{
-  auto acceleration = getAcceleration(io_object);
-  if (acceleration.lengthSq() < MovementThreshold)
-    acceleration = {};
-
-  auto speed = getSpeed(io_object, acceleration, i_dt);
-
-  // Remove collisions
-  for (const auto& collision : io_object.getCollisions())
-  {
-    CONTRACT_ENSURE(collision.isCollision);
-
-    if (!collision.receiver.isRigid() || !collision.sender.isRigid())
-      continue;
-
-    const auto& normalProjection = speed.dot(collision.normal);
-    if (normalProjection > 0)
-      speed = speed - collision.normal * normalProjection * 1.5;
-
-    speed = speed * 0.9;
-  }
-
-  if (speed.lengthSq() < MovementThreshold)
-  {
-    io_object.setSpeed({ 0, 0 });
-    return;
-  }
-
-  io_object.setSpeed(speed);
-
-  const auto position = getPosition(io_object, speed, i_dt);
-  io_object.setPosition(position);
-}
-
-void Physics::updateObjectRotation(double i_dt, IInertial& io_object) const
-{
-  constexpr double MovementThreshold = 0.0001;
-  const auto rotationSpeed = io_object.getRotationSpeed();
-  io_object.setRotationSpeed(0);
-  if (std::abs(rotationSpeed) < MovementThreshold)
-    return;
-
-  io_object.setRotation(io_object.getRotation() + rotationSpeed * i_dt);
 }
