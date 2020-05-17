@@ -6,22 +6,14 @@
 #include "IHullPrototype.h"
 
 
-Rocket::Rocket(FuelTank i_fuelTank, Engine i_engine, Hull i_hull)
-  : d_fuelTank(std::move(i_fuelTank))
+Rocket::Rocket(ILevelModel& i_levelModel, FuelTank i_fuelTank, Engine i_engine, Hull i_hull)
+  : Object(i_levelModel)
+  , d_fuelTank(std::move(i_fuelTank))
   , d_engine(std::move(i_engine))
   , d_hull(std::move(i_hull))
 {
-  constexpr double Size = 32.0 / 10;
-  constexpr double HalfSize = Size / 2;
-
-  d_rect = Sdk::RectD(-HalfSize, HalfSize, -HalfSize, HalfSize);
 }
 
-
-double Rocket::getMaxSpeed() const
-{
-  return 30.0;
-}
 
 double Rocket::getMass() const
 {
@@ -29,148 +21,69 @@ double Rocket::getMass() const
 }
 
 
-const Sdk::Vector2D& Rocket::getPosition() const
-{
-  return d_position;
-}
-
-void Rocket::setPosition(Sdk::Vector2D i_position)
-{
-  d_position = std::move(i_position);
-}
-
-
-const Sdk::Vector2D& Rocket::getSpeed() const
-{
-  return d_speed;
-}
-
-void Rocket::setSpeed(Sdk::Vector2D i_speed)
-{
-  d_speed = std::move(i_speed);
-}
-
-
-void Rocket::addActiveForce(Force i_force)
-{
-  d_activeForces.push_back(std::move(i_force));
-}
-
-const std::vector<Force>& Rocket::getActiveForces() const
-{
-  return d_activeForces;
-}
-
-void Rocket::clearActiveForces()
-{
-  d_activeForces.clear();
-  d_moving = false;
-}
-
-
-bool Rocket::isGravityAffected() const
-{
-  return d_gravityAffected;
-}
-
-void Rocket::setGravityAffected(bool i_affected)
-{
-  d_gravityAffected = i_affected;
-}
-
-
-const std::string& Rocket::getTextureName() const
-{
-  return d_textureName;
-}
-
-void Rocket::setTextureName(std::string i_textureName)
-{
-  d_textureName = std::move(i_textureName);
-}
-
-
 void Rocket::update(double i_dt)
 {
-  if (d_moving)
-    d_fuelTank.waste(d_engine.getPrototype().getConsumption() * i_dt);
+  auto noThrust = [&]() { d_thrust = Physics_NS::Force::zero(); };
+  auto noRotation = [&]() { setRotationSpeed(0); };
 
-  const bool landed = std::any_of(d_collisions.cbegin(), d_collisions.cend(), [](const auto& i_collision) {
-    if (const auto* sceneObject = dynamic_cast<const ISceneObject*>(&i_collision.sender))
-      return sceneObject->getBehavior() == ObjectBehavior::LandingSite;
-    return false;
-  });
-  if (landed)
+  if (!d_fuelTank.isEmpty())
+  {
+    bool isMoving = false;
+
+    if (d_isThrustOn)
+    {
+      const auto thrustPower = d_engine.getPrototype().getPower();
+      d_thrust = getDirection() * thrustPower;
+      isMoving = true;
+    }
+    else
+      noThrust();
+
+    if (d_isRotateLeftOn)
+    {
+      setRotationSpeed(-5);
+      isMoving = true;
+    }
+    else if (d_isRotateRightOn)
+    {
+      setRotationSpeed(5);
+      isMoving = true;
+    }
+    else
+      noRotation();
+
+    if (isMoving)
+      d_fuelTank.waste(d_engine.getPrototype().getConsumption() * i_dt);
+  }
+  else
+    noThrust();
+    
+  if (d_landed)
     d_fuelTank.fill(i_dt * 10);
 }
 
 
-ObjectBehavior Rocket::getBehavior() const
+Physics_NS::Force Rocket::getActiveForcesSum() const
 {
-  return ObjectBehavior::Default;
+  return d_thrust;
 }
 
-
-double Rocket::getRotation() const
+void Rocket::updateCollisions(const std::vector<Physics_NS::CollisionInfo>& i_collisions)
 {
-  return d_rotation;
-}
-
-void Rocket::setRotation(double i_rotation)
-{
-  d_rotation = i_rotation;
-}
-
-double Rocket::getRotationSpeed() const
-{
-  return d_rotationSpeed;
-}
-
-void Rocket::setRotationSpeed(double i_rotationSpeed)
-{
-  d_rotationSpeed = i_rotationSpeed;
-}
-
-
-Sdk::RectD Rocket::getRect() const
-{
-  return d_rect;
-}
-
-void Rocket::setRect(Sdk::RectD i_rect)
-{
-  d_rect = std::move(i_rect);
-}
-
-bool Rocket::isReceiveCollision() const
-{
-  return true;
-}
-
-bool Rocket::isSendCollision() const
-{
-  return true;
-}
-
-bool Rocket::isRigid() const
-{
-  return true;
-}
-
-
-void Rocket::addCollision(CollisionInfo i_collisionInfo)
-{
-  d_collisions.push_back(std::move(i_collisionInfo));
-}
-
-const std::vector<CollisionInfo>& Rocket::getCollisions() const
-{
-  return d_collisions;
-}
-
-void Rocket::clearCollisions()
-{
-  d_collisions.clear();
+  d_landed = std::any_of(i_collisions.cbegin(), i_collisions.cend(), [](const auto& i_collision) {
+    if (const auto* object = dynamic_cast<const Object*>(&i_collision.object1);
+        object && object->getBehavior() == ObjectBehavior::LandingSite)
+    {
+      return true;
+    }
+    if (const auto* object = dynamic_cast<const Object*>(&i_collision.object2);
+        object && object->getBehavior() == ObjectBehavior::LandingSite)
+    {
+      return true;
+    }
+    
+    return false;
+  });
 }
 
 

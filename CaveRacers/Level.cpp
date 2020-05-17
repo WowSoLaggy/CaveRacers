@@ -1,8 +1,18 @@
 #include "stdafx.h"
 #include "Level.h"
 
-#include "Physics.h"
 #include "Rocket.h"
+
+
+Physics_NS::Physics& Level::getPhysics()
+{
+  return d_physics;
+}
+
+const Physics_NS::Physics& Level::getPhysics() const
+{
+  return d_physics;
+}
 
 
 std::optional<std::string> Level::getBackgroundTextureName() const
@@ -16,12 +26,12 @@ void Level::setBackgroundTextureName(std::string i_textureName)
 }
 
 
-std::vector<std::shared_ptr<ISceneObject>> Level::getObjects() const
+std::vector<std::shared_ptr<Object>> Level::getObjects() const
 {
   return d_objects;
 }
 
-std::shared_ptr<ISceneObject> Level::getControlledObjectView() const
+std::shared_ptr<Object> Level::getControlledObjectView() const
 {
   return d_controlledRocket.lock();
 }
@@ -32,14 +42,13 @@ std::shared_ptr<IRocketControl> Level::getControlledObject() const
 }
 
 
-void Level::addObject(std::shared_ptr<ISceneObject> i_object)
+void Level::addObject(std::shared_ptr<Object> i_object)
 {
   CONTRACT_EXPECT(i_object);
-  i_object->setLevel(this);
   d_objects.push_back(std::move(i_object));
 }
 
-void Level::setControlledRocket(std::shared_ptr<IRocket> i_rocket)
+void Level::setControlledRocket(std::shared_ptr<Rocket> i_rocket)
 {
   d_controlledRocket = i_rocket;
 }
@@ -50,6 +59,6 @@ void Level::update(double i_dt)
   for (auto& object : d_objects)
     object->update(i_dt);
 
-  auto inertials = std::vector<std::shared_ptr<IInertial>>{d_objects.begin(), d_objects.end()};
-  updatePhysics(i_dt, inertials);
+  auto inertials = std::vector<std::shared_ptr<Physics_NS::IInertial>>{d_objects.begin(), d_objects.end()};
+  d_physics.update(inertials, i_dt);
 }

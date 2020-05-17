@@ -7,5 +7,4 @@ enum class ObjectBehavior : std::int32_t
 {
   Default = 0,
   LandingSite,
-  Projectile,
 };

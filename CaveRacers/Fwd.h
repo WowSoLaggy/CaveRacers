@@ -7,13 +7,10 @@ class ILevelModel;
 class ILevelView;
 class ISession;
 
-class IRocket;
 class Rocket;
 class IRocketControl;
 
-class ISceneObject;
-class SceneObject;
-class IInertial;
+class Object;
 
 class IFuelTankPrototype;
 class IFuelTank;
@@ -21,7 +18,5 @@ class IEnginePrototype;
 class IEngine;
 class IHullPrototype;
 class IHull;
-
-class Physics;
 
 class PrototypeCollection;

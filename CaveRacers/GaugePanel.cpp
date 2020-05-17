@@ -2,7 +2,7 @@
 #include "GaugePanel.h"
 
 #include "ILevelView.h"
-#include "IRocket.h"
+#include "Rocket.h"
 #include "LevelEvents.h"
 
 #include <Dx/IRenderer2d.h>
@@ -22,7 +22,7 @@ GaugePanel::GaugePanel(Dx::IResourceController& i_resourceController,
   d_sprite.setPosition({ 10, 10 });
 
   connectTo(i_levelView);
-  d_controlledRocket = std::dynamic_pointer_cast<IRocket>(i_levelView.getControlledObjectView());
+  d_controlledRocket = std::dynamic_pointer_cast<Rocket>(i_levelView.getControlledObjectView());
 }
 
 

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BattleScene.h"
 
-#include "IRocket.h"
+#include "Rocket.h"
 
 #include <Dx/ImageDescription.h>
 #include <Dx/IResourceController.h>
@@ -83,7 +83,7 @@ void BattleScene::render(Dx::IRenderer2d& i_renderer) const
     if (!d_showDebug)
       continue;
 
-    auto collisionRect = objectView->getRect();
+    auto collisionRect = objectView->getShape();
     collisionRect.move(objectView->getPosition());
     collisionRect.p1 = collisionRect.p1 * WorldScale;
     collisionRect.p2 = collisionRect.p2 * WorldScale;

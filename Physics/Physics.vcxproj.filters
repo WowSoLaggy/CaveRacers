@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{eb23975a-1db7-4e40-bcb6-775aa3755f91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Physics">
+      <UniqueIdentifier>{d4b414c9-1902-4d8d-a631-2f1dd8c3ac0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Types">
+      <UniqueIdentifier>{ca310f1b-00f5-4eea-b489-40da2a2491af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Settings">
+      <UniqueIdentifier>{92d2d81b-db91-43a8-8748-7020ead794b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Constants">
+      <UniqueIdentifier>{8004da94-e652-4610-9a1c-48f2a67fb30d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Collisions">
+      <UniqueIdentifier>{252f0007-407c-497a-9ebd-16dc0c862628}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>src\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>src\Settings</Filter>
+    </ClCompile>
+    <ClCompile Include="Collisions.cpp">
+      <Filter>src\Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="IInertial.cpp">
+      <Filter>src\Types</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Fwd.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="IInertial.h">
+      <Filter>src\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Force.h">
+      <Filter>src\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>src\Settings</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>src\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Collisions.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionInfo.h">
+      <Filter>src\Collisions</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -13,9 +13,6 @@
     <Filter Include="src\Game">
       <UniqueIdentifier>{40f3b583-e19b-4c31-8250-b66cd6687a88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Physics">
-      <UniqueIdentifier>{9cb11163-982d-484c-8146-15ce43b60d54}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Scene">
       <UniqueIdentifier>{b4c3ffe0-1196-4aa2-83a1-4e47baf916d8}</UniqueIdentifier>
     </Filter>
@@ -43,14 +40,14 @@
     <Filter Include="src\PrototypeCollection">
       <UniqueIdentifier>{9fc6f365-330b-4aa8-aa16-42fe9cfbcbc4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Collisions">
-      <UniqueIdentifier>{6d6b2d08-db6e-46c2-8fc3-8b9b3c151286}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\Gui">
       <UniqueIdentifier>{567e8825-93b2-4851-a2af-e73ecc868fa1}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Gui\Controls">
       <UniqueIdentifier>{f5eab3ac-0a69-4a7b-81da-8d044d393d66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Physics">
+      <UniqueIdentifier>{9cb11163-982d-484c-8146-15ce43b60d54}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -74,9 +71,6 @@
     </ClCompile>
     <ClCompile Include="Rocket.cpp">
       <Filter>src\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>src\Physics</Filter>
     </ClCompile>
     <ClCompile Include="BattleScene.cpp">
       <Filter>src\Scene</Filter>
@@ -126,17 +120,17 @@
     <ClCompile Include="CreateObjects.cpp">
       <Filter>src\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObject.cpp">
-      <Filter>src\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="GetCollision.cpp">
-      <Filter>src\Collisions</Filter>
-    </ClCompile>
     <ClCompile Include="Gui.cpp">
       <Filter>src\Gui</Filter>
     </ClCompile>
     <ClCompile Include="GaugePanel.cpp">
       <Filter>src\Gui\Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="InertialBase.cpp">
+      <Filter>src\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>src\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,15 +161,6 @@
     <ClInclude Include="Rocket.h">
       <Filter>src\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="IInertial.h">
-      <Filter>src\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>src\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Constants.h">
-      <Filter>src\Physics</Filter>
-    </ClInclude>
     <ClInclude Include="IScene.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
@@ -199,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="ILevel.h">
       <Filter>src\LevelModel</Filter>
-    </ClInclude>
-    <ClInclude Include="IRocket.h">
-      <Filter>src\Objects</Filter>
     </ClInclude>
     <ClInclude Include="FuelTank.h">
       <Filter>src\Components\FuelTank</Filter>
@@ -260,23 +242,11 @@
     <ClInclude Include="CreateGame.h">
       <Filter>src\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Force.h">
-      <Filter>src\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="ISceneObject.h">
-      <Filter>src\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="IRocketControl.h">
       <Filter>src\Objects</Filter>
     </ClInclude>
     <ClInclude Include="CreateObjects.h">
       <Filter>src\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>src\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="GetCollision.h">
-      <Filter>src\Collisions</Filter>
     </ClInclude>
     <ClInclude Include="Gui.h">
       <Filter>src\Gui</Filter>
@@ -287,8 +257,11 @@
     <ClInclude Include="ObjectBehavior.h">
       <Filter>src\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionInfo.h">
-      <Filter>src\Collisions</Filter>
+    <ClInclude Include="InertialBase.h">
+      <Filter>src\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>src\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

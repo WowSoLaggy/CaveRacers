@@ -4,63 +4,35 @@
 #include "CreateObjects.h"
 #include "IEnginePrototype.h"
 #include "ILevelModel.h"
-#include "SceneObject.h"
+#include "Object.h"
 
 
-namespace
+void Rocket::thrust(bool i_on)
 {
-  Sdk::Vector2D getDirection(double i_rotation)
-  {
-    return { std::sin(i_rotation), std::cos(i_rotation) };
-  }
-} // anonymous NS
-
-
-void Rocket::thrust()
-{
-  if (d_fuelTank.isEmpty())
-    return;
-
-  const auto thrustPower = d_engine.getPrototype().getPower();
-  const Force thrust = getDirection(getRotation()) * thrustPower;
-
-  addActiveForce(thrust);
-
-  d_moving = true;
+  d_isThrustOn = i_on;
 }
 
-void Rocket::turnLeft()
+void Rocket::turnLeft(bool i_on)
 {
-  if (d_fuelTank.isEmpty())
-    return;
-  setRotationSpeed(-5);
-  d_moving = true;
+  d_isRotateLeftOn = i_on;
 }
 
-void Rocket::turnRight()
+void Rocket::turnRight(bool i_on)
 {
-  if (d_fuelTank.isEmpty())
-    return;
-  setRotationSpeed(5);
-  d_moving = true;
+  d_isRotateRightOn = i_on;
 }
 
 
 void Rocket::fire1()
 {
-  auto* level = getLevel();
-  CONTRACT_ASSERT(level);
-
-  auto projectile = createProjectile();
+  auto projectile = createProjectile(getLevel());
   CONTRACT_ASSERT(projectile);
 
-  const auto shootDirection = getDirection(getRotation());
+  const auto shootDirection = getDirection();
   const auto projectileSpeed = getSpeed() + shootDirection * 75;
   projectile->setSpeed(projectileSpeed);
 
   projectile->setPosition(getPosition() + shootDirection * 2.5);
-
-  level->addObject(projectile);
 }
 
 

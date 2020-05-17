@@ -20,5 +20,5 @@ public:
 
 private:
   Dx::AnimatedSprite d_sprite;
-  std::shared_ptr<IRocket> d_controlledRocket;
+  std::shared_ptr<Rocket> d_controlledRocket;
 };
