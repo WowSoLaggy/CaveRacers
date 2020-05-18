@@ -9,6 +9,17 @@
 
 namespace Physics_NS
 {
+  namespace
+  {
+    double getSumElasticity(const IInertial& i_first, const IInertial& i_second)
+    {
+      const double retval = (i_first.getElasticity() + i_second.getElasticity()) / 2;
+      return std::min(std::max(retval, 0.0), 1.0);
+    }
+
+  } // anonymous NS
+
+
   Settings& Physics::getSettings()
   {
     return d_settings;
@@ -69,7 +80,7 @@ namespace Physics_NS
   {
     const auto accel = getAcceleration(io_object);
 
-    const auto speed = io_object.getSpeed() + accel * i_dt;
+    const auto speed = getSpeed(io_object, accel, i_dt);
     io_object.setSpeed(speed);
 
     const auto position = io_object.getPosition() + speed * i_dt;
@@ -89,7 +100,8 @@ namespace Physics_NS
       io_object.setRotation(io_object.getSpeedAngle());
   }
 
-  Sdk::Vector2D Physics::getAcceleration(IInertial& i_object) const
+
+  Sdk::Vector2D Physics::getAcceleration(const IInertial& i_object) const
   {
     const auto activeForces = i_object.getActiveForcesSum();
 
@@ -101,6 +113,30 @@ namespace Physics_NS
       accel += { 0, -d_settings.getGravityAcceleration() };
 
     return accel;
+  }
+
+  Sdk::Vector2D Physics::getSpeed(const IInertial& i_object, const Sdk::Vector2D& i_accel, double i_dt) const
+  {
+    auto virtualSpeed = i_object.getSpeed() + i_accel * i_dt;
+
+    const auto collisionsIt = d_collisionsMap.find(&i_object);
+    if (collisionsIt == d_collisionsMap.cend())
+      return virtualSpeed;
+
+    const auto& collisions = collisionsIt->second;
+    for (const auto& collision : collisions)
+    {
+      const auto& other = collision.object;
+      const auto& normal = collision.normal;
+
+      const double elasticity = getSumElasticity(i_object, other);
+
+      const auto& normalProj = virtualSpeed.dot(normal);
+      if (normalProj > 0)
+        virtualSpeed = virtualSpeed - normal * normalProj * 1.5;
+    }
+
+    return virtualSpeed;
   }
 
 } // Physics_NS

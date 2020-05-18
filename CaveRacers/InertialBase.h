@@ -35,6 +35,9 @@ public:
   virtual Sdk::RectD getShape() const override;
   void setShape(Sdk::RectD i_shape);
 
+  virtual double getElasticity() const override;
+  void setElasticity(double i_elasticity);
+
 private:
   bool d_isGravityAffected = false;
   double d_mass = 0.0;
@@ -45,4 +48,5 @@ private:
   double d_rotation = 0.0;
   bool d_rotateToSpeed = false;
   Sdk::RectD d_rect;
+  double d_elasticity = 0.0;
 };

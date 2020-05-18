@@ -58,6 +58,17 @@ namespace Physics_NS
     /// Returns shape of the object (only rectangle is supported so far)
     virtual Sdk::RectD getShape() const = 0;
 
+    /// Returns elasticity coefficient of the object
+    /// This coefficient shows how much impulse is 'mirrored' on collision
+    /// (1 - coeff) shows how much impulse is absorbed (is lost) on collision
+    /// E.g. coeff = 1 means that ball falling on the ground will continue
+    /// its movement with the same speed but with the opposite direction
+    /// E.g. coeff = 0 means that ball falling on the ground will lose
+    /// all its speed
+    /// Value shall be in [0..1], will be cropped otherwise
+    virtual double getElasticity() const = 0;
+
+
     /// Calls on each physics update to notify object about all its collisions
     /// \param[in] i_collisions - all collisions on the current frame
     virtual void updateCollisions(const std::vector<CollisionInfo>& i_collisions);

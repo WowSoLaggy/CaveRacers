@@ -34,7 +34,9 @@ namespace Physics_NS
     void updateObject(IInertial& io_object, double i_dt) const;
     void updateLinear(IInertial& io_object, double i_dt) const;
     void updateAngular(IInertial& io_object, double i_dt) const;
-    Sdk::Vector2D getAcceleration(IInertial& i_object) const;
+
+    Sdk::Vector2D getAcceleration(const IInertial& i_object) const;
+    Sdk::Vector2D getSpeed(const IInertial& i_object, const Sdk::Vector2D& i_accel, double i_dt) const;
   };
 
 } // Physics_NS

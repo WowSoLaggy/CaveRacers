@@ -23,6 +23,9 @@ std::shared_ptr<Rocket> createRocket(ILevelModel& i_levelModel,
   auto rocket = std::make_shared<Rocket>(i_levelModel, std::move(fuelTank), std::move(engine), std::move(hull));
   rocket->setTextureName("Rocket.png");
 
+  constexpr double HalfSize = 32.0 / 2 / 10;
+  rocket->setShape({ -HalfSize, HalfSize, -HalfSize, HalfSize });
+
   rocket->setGravityAffected(true);
 
   i_levelModel.addObject(rocket);
@@ -36,6 +39,9 @@ std::shared_ptr<Object> createWall(ILevelModel& i_levelModel)
   object->setTextureName("Wall.png");
   object->setMovable(false);
 
+  constexpr double HalfSize = 64.0 / 2 / 10;
+  object->setShape({ -HalfSize, HalfSize, -HalfSize, HalfSize });
+
   i_levelModel.addObject(object);
   return object;
 }
@@ -46,6 +52,9 @@ std::shared_ptr<Object> createLandingSite(ILevelModel& i_levelModel)
   object->setTextureName("LandingSite.png");
   object->setBehavior(ObjectBehavior::LandingSite);
   object->setMovable(false);
+
+  constexpr double HalfSize = 64.0 / 2 / 10;
+  object->setShape({ -HalfSize, HalfSize, -HalfSize, HalfSize });
 
   i_levelModel.addObject(object);
   return object;

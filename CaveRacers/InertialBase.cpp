@@ -104,3 +104,14 @@ void InertialBase::setShape(Sdk::RectD i_shape)
 {
   d_rect = std::move(i_shape);
 }
+
+
+double InertialBase::getElasticity() const
+{
+  return d_elasticity;
+}
+
+void InertialBase::setElasticity(double i_elasticity)
+{
+  d_elasticity = i_elasticity;
+}
