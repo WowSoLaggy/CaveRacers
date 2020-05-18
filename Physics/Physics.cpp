@@ -26,7 +26,7 @@ namespace Physics_NS
     if (io_objects.empty())
       return;
 
-    std::vector<CollisionInfo> collisions;
+    d_collisionsMap.clear();
 
     for (auto itFirst = io_objects.cbegin(); ; ++itFirst)
     {
@@ -42,8 +42,11 @@ namespace Physics_NS
         const auto secondPtr = *itSecond;
         const auto& second = CONTRACT_DEREF(secondPtr);
 
-        if (const auto collisionOpt = getCollision(first, second))
-          collisions.push_back(std::move(*collisionOpt));
+        if (const auto normalOpt = getCollision(first, second))
+        {
+          d_collisionsMap[&first].push_back({ second, *normalOpt });
+          d_collisionsMap[&second].push_back({ first, *normalOpt });
+        }
       }
     }
 

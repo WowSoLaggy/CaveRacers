@@ -71,17 +71,11 @@ Physics_NS::Force Rocket::getActiveForcesSum() const
 void Rocket::updateCollisions(const std::vector<Physics_NS::CollisionInfo>& i_collisions)
 {
   d_landed = std::any_of(i_collisions.cbegin(), i_collisions.cend(), [](const auto& i_collision) {
-    if (const auto* object = dynamic_cast<const Object*>(&i_collision.object1);
+    if (const auto* object = dynamic_cast<const Object*>(&i_collision.object);
         object && object->getBehavior() == ObjectBehavior::LandingSite)
     {
       return true;
     }
-    if (const auto* object = dynamic_cast<const Object*>(&i_collision.object2);
-        object && object->getBehavior() == ObjectBehavior::LandingSite)
-    {
-      return true;
-    }
-    
     return false;
   });
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CollisionInfo.h"
 #include "Fwd.h"
 #include "Settings.h"
 
@@ -24,7 +25,11 @@ namespace Physics_NS
       double i_dt) const;
 
   private:
+    /// Stores physics settings
     Settings d_settings;
+
+    /// Map of collisions for every updated object last frame
+    mutable std::unordered_map<const IInertial*, std::vector<CollisionInfo>> d_collisionsMap;
 
     void updateObject(IInertial& io_object, double i_dt) const;
     void updateLinear(IInertial& io_object, double i_dt) const;

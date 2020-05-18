@@ -8,7 +8,7 @@
 
 namespace Physics_NS
 {
-  std::optional<CollisionInfo> getCollision(const IInertial& i_object1, const IInertial& i_object2)
+  std::optional<Sdk::Vector2D> getCollision(const IInertial& i_object1, const IInertial& i_object2)
   {
     auto rect1 = i_object1.getShape();
     auto rect2 = i_object2.getShape();
@@ -20,28 +20,21 @@ namespace Physics_NS
     if (!isCollision)
       return std::nullopt;
 
-    Sdk::Vector2D normal;
     const auto side = Sdk::getSide(rect1.center() - rect2.center());
     switch (side)
     {
     case Sdk::Side::Up:
-      normal = Sdk::Vector2D{ 0, -1 };
-      break;
+      return Sdk::Vector2D{ 0, -1 };
     case Sdk::Side::Down:
-      normal = Sdk::Vector2D{ 0, 1 };
-      break;
+      return Sdk::Vector2D{ 0, 1 };
     case Sdk::Side::Left:
-      normal = Sdk::Vector2D{ 1, 0 };
-      break;
+      return Sdk::Vector2D{ 1, 0 };
     case Sdk::Side::Right:
-      normal = Sdk::Vector2D{ -1, 0 };
-      break;
+      return Sdk::Vector2D{ -1, 0 };
 
     default:
       CONTRACT_ASSERT(false);
     }
-
-    return CollisionInfo{ i_object1, i_object2, normal };
   }
 
 } // Physics_NS

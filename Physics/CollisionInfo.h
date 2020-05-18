@@ -9,9 +9,7 @@ namespace Physics_NS
 {
   struct CollisionInfo
   {
-    const IInertial& object1;
-    const IInertial& object2;
-
+    const IInertial& object;
     const Sdk::Vector2D normal;
   };
 
