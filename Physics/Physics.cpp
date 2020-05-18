@@ -44,8 +44,9 @@ namespace Physics_NS
 
         if (const auto normalOpt = getCollision(first, second))
         {
-          d_collisionsMap[&first].push_back({ second, *normalOpt });
-          d_collisionsMap[&second].push_back({ first, *normalOpt });
+          const auto normal = *normalOpt;
+          d_collisionsMap[&first].push_back({ second, normal });
+          d_collisionsMap[&second].push_back({ first, -normal });
         }
       }
     }
